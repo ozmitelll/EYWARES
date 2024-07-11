@@ -5,6 +5,15 @@ import ArrowIcon from '../images/arrow-up-right.svg';
 const Modal = ({openModal, handleClose}) => {
     if (!openModal) return null;
 
+    const handleItemClick = (anchorId) => {
+        handleClose();
+        setTimeout(() => {
+            const element = document.getElementById(anchorId);
+            if (element) {
+                element.scrollIntoView({behavior: 'smooth'});
+            }
+        }, 300); // Wait for modal close animation
+    };
 
     return (
 
@@ -39,15 +48,20 @@ const Modal = ({openModal, handleClose}) => {
                 <div className="flex lg:flex-row flex-col">
                     <div
                         className="flex flex-col justify-center items-start lg:gap-12 gap-6 text-white font-montserrat lg:text-6xl md:text-4xl text-3xl font-thin leading-snug">
-                        <p className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">О
+                        <p onClick={() => handleItemClick('about')}
+                           className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">О
                             нас</p>
-                        <p className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">Финансовая
+                        <p onClick={() => handleItemClick('financial-model')}
+                           className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">Финансовая
                             модель</p>
-                        <p className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">Условия
+                        <p onClick={() => handleItemClick('token-sale-terms')}
+                           className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">Условия
                             продажи токенов</p>
-                        <p className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">Реферальная
+                        <p onClick={() => handleItemClick('referral-program')}
+                           className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">Реферальная
                             программа</p>
-                        <p className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">Контакты</p>
+                        <p onClick={() => handleItemClick('contacts')}
+                           className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">Контакты</p>
                     </div>
 
                     <div

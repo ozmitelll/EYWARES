@@ -13,7 +13,7 @@ const TermToSale = () => {
                 }}
             >
             </div>
-            <div className='lg:w-1/2 md:w-2/3 flex flex-col gap-10 justify-center lg:pr-16'>
+            <div id={'token-sale-terms'} className='lg:w-1/2 md:w-2/3 flex flex-col gap-10 justify-center lg:pr-16'>
                 <p className=' text-4xl font-normal m-0 text-left'>
                     Условия продажи токенов
                 </p>

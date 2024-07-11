@@ -60,7 +60,7 @@ const History = () => {
                     <tbody>
                     {transations.map((item) => (
                         <React.Fragment key={item.id}>
-                            <tr className="bg-[#191919] h-[45px] hover:border-2 rounded-xl border-white">
+                            <tr className="bg-[#191919] h-[45px] rounded-xl">
                                 <td className="rounded-l-lg">{item.data}</td>
                                 <td>{`${item.sum} USDT`}</td>
                                 <td className="rounded-r-lg">{item.type}</td>

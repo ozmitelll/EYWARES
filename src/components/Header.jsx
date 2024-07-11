@@ -43,7 +43,7 @@ const Header = ({ handleOpen, handleClose }) => {
                     <img src={MenuIcon} alt="Menu icon" className="w-8 h-auto"/>
                 </button>
             </div>
-            <div ref={menuRef} className={`absolute right-0 mt-64 mr-48 w-56 bg-[#282828] shadow-md z-50 flex flex-col rounded-lg overflow-hidden transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+            <div ref={menuRef} className={`absolute lg:right-0 md:right-0 mt-64 mr-48 w-56 bg-[#282828] shadow-md z-50 flex flex-col rounded-lg overflow-hidden transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 <a href="/history" className="p-2 text-white font-semibold hover:underline transition-colors">История транзакций</a>
                 <a href="/deposit" className="p-2 text-white font-semibold hover:underline transition-colors">Внести депозит</a>
                 <a href="/account" className="p-2 text-white font-semibold hover:underline transition-colors">Личный кабинет</a>

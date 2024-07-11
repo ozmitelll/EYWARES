@@ -4,8 +4,8 @@ import ArrowIcon from "../images/arrow-up-right.svg";
 const AboutOur = ({id}) => {
     return (
         <div id={id} className='lg:h-screen h-[930px] w-full bg-transparent text-white flex justify-end lg:py-4 mt-8'>
-            <div className='lg:w-1/2 sm:w-2/3 flex flex-col justify-center gap-4 lg:pl-8  lg:pr-24'>
-                <p className=' text-4xl font-normal text-left'>
+            <div id={'about'} className='lg:w-1/2 sm:w-2/3 flex flex-col justify-center gap-4 lg:pl-8  lg:pr-24'>
+                <p  className=' text-4xl font-normal text-left'>
                     О нас
                 </p>
                 <div

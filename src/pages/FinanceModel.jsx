@@ -2,8 +2,9 @@ import React from 'react';
 
 const FinanceModel = () => {
     return (
-        <div className='w-full h-screen bg-transparent flex flex-col items-center justify-center gap-8 pt-20'>
-            <p className='lg:text-4xl text-3xl font-normal leading-snug text-center text-white '>
+        <div className='w-full h-screen bg-transparent flex flex-col items-center justify-center gap-8 pt-20 relative'>
+            <div id={'financial-model'} className={'absolute top-12 pt-12 h-4 w-4'}>.</div>
+            <p  className='lg:text-4xl text-3xl font-normal leading-snug text-center text-white '>
                 Финансовая модель
             </p>
             <p className='lg:text-xl text-lg font-normal leading-snug text-center text-white '>

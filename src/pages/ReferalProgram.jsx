@@ -42,7 +42,7 @@ const Accordion = ({title, children}) => {
 
 const ReferalProgram = () => {
     return (
-        <div className="min-h-screen h-auto w-full bg-transparent text-white flex lg:flex-row flex-col lg:justify-between lg:gap-0 gap-6 items-center relative">
+        <div id={'referral-program'} className="pt-4 min-h-screen h-auto w-full bg-transparent text-white flex lg:flex-row flex-col lg:justify-between lg:gap-0 gap-6 items-center relative">
             <div
                 id="referal"
                 className="absolute top-0 lg:-left-20 -left-50 lg:w-full md:w-0 sm:w-0 h-full bg-center rounded-lg -z-50"
@@ -51,7 +51,7 @@ const ReferalProgram = () => {
                 }}
             >
             </div>
-            <div className='lg:w-1/2 w-full flex flex-col ls:gap-7 gap-4 w-[615px] h-auto '>
+            <div  className='lg:w-1/2 w-full flex flex-col ls:gap-7 gap-4 w-[615px] h-auto '>
                 <div className={'bg-cardcolor bg-opacity-70 border border-gray-700 rounded-xl p-6 lg:h-[220px] md:h-[220px] h-[305px]'}>
                     <p className='text-4xl font-normal leading-tight pb-4'>Реферальная программа</p>
                     <p className='text-base leading-snug'>

@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Modal from "./pages/Modal";
 import Deposit from "./pages/Deposit";
 import Account from "./pages/Account";
+import GraphTest from "./pages/GraphTest";
 
 function App() {
 
@@ -37,6 +38,9 @@ function App() {
                     </Route>
                     <Route path='/account'>
                         <Account handleOpen={handleOpen} handleClose={handleClose}/>
+                    </Route>
+                    <Route path='/graph'>
+                        <GraphTest></GraphTest>
                     </Route>
                 </Switch>
                 <Modal openModal={openModal} handleClose={handleClose}/>
