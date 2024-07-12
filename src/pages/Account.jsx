@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from 'react';
-import Graf from "../components/Graf";
+import GraphTest from "./GraphTest";
 
 const Account = () => {
     const [isAccordionOpen, setAccordionOpen] = useState(false);
@@ -27,7 +27,7 @@ const Account = () => {
                 }}
             >
             </div>
-            <div className="w-full h-screen flex flex-col lg:justify-center md:justify-center justify-start items-center lg:gap-16 md:gap-16 gap-6">
+            <div className="w-full lg:h-screen md:h-screen h-fit flex flex-col lg:justify-center md:justify-center justify-start items-center lg:gap-16 md:gap-16 gap-6">
                 <p className="text-white  lg:text-4xl md:text-4xl text-2xl lg:pt-0 md:pt-0 pt-6  font-semibold leading-tight text-left w-fit">Личный
                     кабинет</p>
                 <div className='flex flex-col lg:flex-row justify-center items-end w-full gap-8'>
@@ -66,7 +66,8 @@ const Account = () => {
                     </div>
                 </div>
             </div>
-            <Graf/>
+            <GraphTest/>
+
         </div>
     );
 }

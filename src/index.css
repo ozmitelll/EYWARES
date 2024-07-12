@@ -21,3 +21,48 @@ body{
 #contacts{
   background-image: url("./images/ContactBack.svg");
 }
+
+
+.hex-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-gap: 10px;
+  width: 90%;
+}
+
+.hex {
+  width: 100px;
+  height: 100px;
+  background-color: #ffffff;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  position: relative;
+}
+
+.hex:nth-child(1) {
+  grid-column: span 2;
+}
+
+.hex:nth-child(11),
+.hex:nth-child(12),
+.hex:nth-child(13),
+.hex:nth-child(14),
+.hex:nth-child(15) {
+  background-color: #cccccc;
+}
+
+.tooltip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+  visibility: hidden;
+}
+
+.hex:nth-child(2):hover .tooltip {
+  visibility: visible;
+}
