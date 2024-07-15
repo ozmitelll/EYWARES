@@ -6,6 +6,8 @@ import AboutOur from "./AboutOur";
 import FinanceModel from "./FinanceModel";
 import TermToSale from "./TermToSale";
 import ReferalProgram from "./ReferalProgram";
+import { throttle } from 'lodash';
+
 import Contacts from "./Contacts";
 import Circle from '../images/7.png';
 import Header from "../components/Header";
@@ -64,7 +66,7 @@ const Landing = ({handleOpen, handleClose}) => {
     const [points, setPoints] = useState(pointsDesktop);
 
     useEffect(() => {
-        const updatePoints = () => {
+        const updatePoints = throttle(() => {
             if (window.innerWidth < 768) {
                 setPoints(pointsMobile);
             } else if (window.innerWidth < 1024) {
@@ -72,7 +74,7 @@ const Landing = ({handleOpen, handleClose}) => {
             } else {
                 setPoints(pointsDesktop);
             }
-        };
+        }, 100);
 
         window.addEventListener('resize', updatePoints);
         updatePoints();
@@ -93,7 +95,7 @@ const Landing = ({handleOpen, handleClose}) => {
                 <motion.img
                     src={Circle}
                     alt="Animated Circle"
-                    className="absolute w-[414px] h-[414px] lg:mt-24 md:mt-24 lg:ml-16 -z-40"
+                    className="absolute w-[414px] h-[414px] lg:mt-24 md:mt-24 lg:ml-16 -z-40 animated-element"
                     style={{x, y, scale, opacity}}
                 />
                 <MainPage id="anchor1"/>

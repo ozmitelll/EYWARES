@@ -70,3 +70,8 @@ body{
 ::-webkit-scrollbar {
   display: none;
 }
+
+
+.animated-element {
+  will-change: transform, opacity;
+}
