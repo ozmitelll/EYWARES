@@ -1,7 +1,8 @@
 import React, {useState, useRef, useEffect} from 'react';
 import GraphTest from "./GraphTest";
+import Header from "../components/Header";
 
-const Account = () => {
+const Account = ({handleOpen, handleClose}) => {
     const [isAccordionOpen, setAccordionOpen] = useState(false);
     const contentRef = useRef(null);
 
@@ -18,7 +19,8 @@ const Account = () => {
 
     return (
         <div
-            className="lg:h-screen md:h-screen h-fit w-full bg-transparent text-white flex flex-col justify-start lg:gap-20 md:gap-20 gap-4 items-center relative lg:px-16 md:px-16 px-4">
+            className="lg:h-screen md:h-screen h-fit w-full bg-transparent text-white flex flex-col justify-start lg:gap-10 md:gap-8 gap-4 items-center relative lg:px-16 md:px-16 px-4">
+            <Header handleOpen={handleOpen} handleClose={handleClose}/>
             <div
                 id="referal"
                 className="absolute lg:-top-28 lg:-left-20 -top-24 -left-50 bg-100 lg:w-full md:w-full sm:w-0 h-full rounded-lg -z-50"

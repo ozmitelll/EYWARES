@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import Header from "../components/Header";
 
 const valuesForTable = [
     {id: 1, data: '15.01.2023', sum: 250.75, type: 'credit'},
@@ -7,7 +8,7 @@ const valuesForTable = [
     {id: 4, data: '10.04.2023', sum: 475.25, type: 'credit'},
     {id: 5, data: '12.05.2023', sum: 60.30, type: 'debit'},
 ];
-const History = () => {
+const History = ({handleOpen,handleClose}) => {
     const [transations, setTransations] = useState([]);
     const [widthWindow, setWidthWindow] = useState(window.innerWidth);
     useEffect(() => {
@@ -26,7 +27,9 @@ const History = () => {
     }, [])
     return (
         <div
-            className="lg:h-screen md:h-screen h-fit w-full bg-transparent text-white flex flex-col justify-start lg:gap-20 md:gap-20 gap-4 items-center relative lg:px-16 md:px-16 px-4">
+            className="lg:h-screen md:h-screen h-fit w-full bg-transparent text-white flex flex-col justify-start lg:gap-8 md:gap-20 gap-4 items-center relative lg:px-16 md:px-16 px-4">
+            <Header handleOpen={handleOpen} handleClose={handleClose}/>
+
             <div
                 id="referal"
                 className="absolute lg:-top-28 lg:-left-20 -top-24 -left-50 bg-100 lg:w-full md:w-full sm:w-0 h-full rounded-lg -z-50"
@@ -35,7 +38,7 @@ const History = () => {
                 }}
             >
             </div>
-            <p className="text-white lg:pt-16 md:pt-16 py-6 lg:text-3xl md:text-3xl text-2xl font-semibold text-left w-fit">История
+            <p className="text-white  py-6 lg:text-3xl md:text-3xl text-2xl font-semibold text-left w-fit">История
                 транзакций</p>
             {widthWindow < 500 ?
                 <div className={'w-full flex flex-col gap-6 pb-6'}>

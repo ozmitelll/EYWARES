@@ -28,7 +28,7 @@ const Header = ({ handleOpen, handleClose }) => {
     }, []);
 
     return (
-        <div className="lg:px-16 md:px-16 px-4 py-6 flex justify-between items-center w-full bg-transparent">
+        <div className="py-6 flex justify-between items-center w-full bg-transparent">
             <Link to="/">
                 <img src={Logo} alt="Logo" className="h-12 w-auto" />
             </Link>
@@ -44,9 +44,9 @@ const Header = ({ handleOpen, handleClose }) => {
                 </button>
             </div>
             <div ref={menuRef} className={`absolute lg:right-0 md:right-0 mt-64 mr-48 w-56 bg-[#282828] shadow-md z-50 flex flex-col rounded-lg overflow-hidden transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-                <a href="/history" className="p-2 text-white font-semibold hover:underline transition-colors">История транзакций</a>
-                <a href="/deposit" className="p-2 text-white font-semibold hover:underline transition-colors">Внести депозит</a>
-                <a href="/account" className="p-2 text-white font-semibold hover:underline transition-colors">Личный кабинет</a>
+                <Link to="/history" className="p-2 text-white font-semibold hover:underline transition-colors">История транзакций</Link>
+                <Link to="/deposit" className="p-2 text-white font-semibold hover:underline transition-colors">Внести депозит</Link>
+                <Link to="/account" className="p-2 text-white font-semibold hover:underline transition-colors">Личный кабинет</Link>
                 <hr/>
                 <div className="p-2 text-white font-semibold hover:underline transition-colors">Войти</div>
             </div>

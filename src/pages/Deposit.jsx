@@ -1,12 +1,14 @@
 import React, {useState} from 'react';
+import Header from "../components/Header";
 
-const Deposit = () => {
+const Deposit = ({handleOpen, handleClose}) => {
     const [sum, setSum] = useState("");
     const [address, setAddress] = useState("");
 
     return (
         <div
-            className="lg:h-screen md:h-screen h-fit w-full bg-transparent text-white flex flex-col justify-start lg:gap-20 md:gap-20 gap-4 items-center relative lg:px-16 md:px-16 px-4">
+            className="lg:h-screen md:h-screen h-fit w-full bg-transparent text-white flex flex-col justify-start lg:gap-4 md:gap-20 gap-4 items-center relative lg:px-16 md:px-16 px-4">
+            <Header handleOpen={handleOpen} handleClose={handleClose}/>
             <div
                 id="referal"
                 className="absolute lg:-top-28 lg:-left-20 -top-24 -left-50 bg-100 lg:w-full md:w-full sm:w-0 h-full rounded-lg -z-50"
@@ -16,7 +18,7 @@ const Deposit = () => {
             >
             </div>
             <div className="flex flex-col justify-center items-center lg:gap-16 md:gap-16 gap-8 w-full">
-                <p className="text-white lg:pt-16 md:pt-16 pt-6 text-2xl font-bold leading-snug text-left w-fit">Внести
+                <p className="text-white lg:pt-8 md:pt-8 pt-6 lg:text-3xl md:text-3xl text-2xl font-bold leading-snug text-left w-fit">Внести
                     депозит</p>
                 <div
                     className="bg-[#222222A8] p-6 lg:w-[616px] md:w-[616px] w-full rounded-lg border border-[#5E5E5E87] flex flex-col items-center gap-6">
