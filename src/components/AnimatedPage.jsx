@@ -11,7 +11,7 @@ const AnimatedPage = ({ children }) => {
     const pageTransition = {
         type: "tween",
         ease: "linear",
-        duration: 2
+        duration: 1
     };
 
     return (

@@ -20,7 +20,7 @@ function App() {
             const timer = setTimeout(() => {
                 setIsNavigating(false);
                 history.push(location.pathname);
-            }, 2000); // Delay of 2 seconds
+            }, 1000); // Delay of 2 seconds
 
             return () => clearTimeout(timer);
         }
