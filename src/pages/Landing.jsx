@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {motion, useTransform, useScroll} from 'framer-motion';
+import {motion, useTransform, useScroll, useSpring} from 'framer-motion';
 import MainPage from "./MainPage";
 import SecondSlide from "./SecondSlide";
 import AboutOur from "./AboutOur";
@@ -60,6 +60,7 @@ const GetTransforms = (scrollY, points) => {
 
 const Landing = ({handleOpen, handleClose}) => {
     const {scrollY} = useScroll();
+    const smoothScrollY = useSpring(scrollY, { stiffness: 100, damping: 30 });
     const [points, setPoints] = useState(pointsDesktop);
 
     useEffect(() => {
@@ -81,7 +82,8 @@ const Landing = ({handleOpen, handleClose}) => {
         };
     }, []);
 
-    const {x, y, scale, opacity} = GetTransforms(scrollY, points);
+    const {x, y, scale, opacity} = GetTransforms(smoothScrollY, points);
+
 
     return (
         <>

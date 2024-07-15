@@ -26,10 +26,6 @@ function App() {
         }
     }, [isNavigating, location, history]);
 
-    const handleNavigation = (path) => {
-        setIsNavigating(true);
-        history.replace(path);
-    };
 
     const handleClose = () => setOpenModal(false);
     const handleOpen = () => setOpenModal(true);
