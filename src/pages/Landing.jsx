@@ -8,13 +8,13 @@ import Contacts from "./Contacts";
 import Header from "../components/Header";
 import { throttle } from 'lodash';
 
-import center from '../images/1_animation_.svg';
-import pental1 from '../images/2_animation_.svg';
-import pental2 from '../images/3_animation_.svg';
-import pental3 from '../images/4_animation_.svg';
-import pental4 from '../images/5_animation_.svg';
-import pental5 from '../images/6_animation_.svg';
-import pental6 from '../images/7_animation_.svg';
+import center from '../images/1_animation_(2).svg';
+import pental1 from '../images/2_animation_(2).svg';
+import pental2 from '../images/3_animation_(2).svg';
+import pental3 from '../images/4_animation_(2).svg';
+import pental4 from '../images/5_animation_(2).svg';
+import pental5 from '../images/6_animation_(2).svg';
+import pental6 from '../images/7_animation_(2).svg';
 
 const GetTransforms = (scrollY) => {
     const y = useTransform(scrollY, [0, 4000], [0, 4000]);
