@@ -37,7 +37,7 @@ const RegistrateModal = ({openModal, handleClose}) => {
                     </button>
                 </div>
                 <div className="flex px-4  h-full lg:flex-row flex-col sm:justify-start md:justify-start lg:justify-between gap-72 lg:gap-0 md:gap-64">
-                    <Registration handleClose={()=>handleClose}/>
+                    <Registration handleClose={handleClose}/>
                 </div>
             </div>
         </div>
