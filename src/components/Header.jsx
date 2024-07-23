@@ -29,11 +29,11 @@ const Header = ({ handleOpen, handleClose,handleOpenRegistrate }) => {
     }, []);
 
     return (
-        <div className="py-6 pt-0 flex justify-between items-center w-full bg-transparent">
+        <div className="py-6 pt-0 flex justify-between items-start w-full bg-transparent">
             <Link to="/">
-                <img src={Logo} alt="Logo" className="h-24 w-auto" />
+                <img src={Logo} alt="Logo" className="lg:h-48 md:h-32 h-24 w-auto" />
             </Link>
-            <div className={`flex items-center lg:gap-4 md:gap-4 ${isAuth? 'gap-12': 'gap-8'}`}>
+            <div className={`flex items-center lg:gap-4 md:gap-4 ${isAuth? 'gap-12': 'gap-8'} pt-6`}>
                 {isAuth ? <button ref={buttonRef} onClick={toggleMenu}
                                     className=" flex items-center justify-center gap-4 rounded-lg border border-gray-600 bg-gradient-to-b from-mycolorfrom to-gray-mycolorto text-white  text-sm font-medium leading-tight p-2 px-6">
                     <span className="text-white font-light leading-none">Личный аккаунт</span>

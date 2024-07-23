@@ -31,7 +31,7 @@ const MainPage = ({id, handleOpen, handleClose}) => {
     return (
         <div id={id} className='h-screen bg-transparent w-full'>
             <div
-                className='lg:pt-20 md:pt-16 flex md:flex-row flex-col justify-between items-center lg:pr-28 overflow-hidden '>
+                className='lg:pt-12 pt-0 flex md:flex-row flex-col justify-between items-center lg:pr-28 overflow-hidden '>
                 <motion.div
                     className='transform transition-transform duration-200 ease-out flex items-center justify-center'
                     style={{x}}
