@@ -4,6 +4,7 @@ import Me from '../images/me.svg';
 import Me2 from '../images/referalLikeMe2.svg';
 import Polygon from '../images/Polygon 12.svg';
 import ReferalLikeMe from '../images/referalLikeMe.svg';
+// eslint-disable-next-line
 import MyReferal from '../images/myRefereal.svg';
 import ReferalReferalEmpty from '../images/referalReferalEmpty.svg';
 import MyEmptyReferal from '../images/myReferealEmpty.svg';

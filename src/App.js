@@ -8,8 +8,6 @@ import Deposit from "./pages/Deposit";
 import Account from "./pages/Account";
 import GraphTest from "./pages/GraphTest";
 import AnimatedPage from './components/AnimatedPage';
-import PetalCenter from "./pages/PetalCenter";
-import Registration from "./pages/Registration";
 import RegistrateModal from "./pages/RegistrateModal";
 
 function App() {

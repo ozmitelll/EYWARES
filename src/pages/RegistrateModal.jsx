@@ -1,20 +1,10 @@
 import React from 'react';
 import exit from '../images/Group36.svg';
-import ArrowIcon from '../images/arrow-up-right.svg';
 import Registration from "./Registration";
 
 const RegistrateModal = ({openModal, handleClose}) => {
     if (!openModal) return null;
 
-    const handleItemClick = (anchorId) => {
-        handleClose();
-        setTimeout(() => {
-            const element = document.getElementById(anchorId);
-            if (element) {
-                element.scrollIntoView({behavior: 'smooth'});
-            }
-        }, 300); // Wait for modal close animation
-    };
 
     return (
 
@@ -47,7 +37,7 @@ const RegistrateModal = ({openModal, handleClose}) => {
                     </button>
                 </div>
                 <div className="flex px-4  h-full lg:flex-row flex-col sm:justify-start md:justify-start lg:justify-between gap-72 lg:gap-0 md:gap-64">
-                    <Registration/>
+                    <Registration handleClose={()=>handleClose}/>
                 </div>
             </div>
         </div>

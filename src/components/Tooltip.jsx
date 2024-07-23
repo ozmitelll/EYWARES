@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef} from 'react';
 
 const Tooltip = ({children, price, date, referal_link}) => {
     const [isVisible, setIsVisible] = useState(false);

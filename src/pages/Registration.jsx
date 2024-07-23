@@ -1,17 +1,13 @@
 import React, {useState} from 'react';
-import Header from "../components/Header";
-import exit from "../images/Group36.svg";
 import x from "../images/x.svg"
-import {useHistory} from "react-router-dom";
 
 const Registration = ({handleOpen, handleClose}) => {
     const [sum, setSum] = useState("");
     const [address, setAddress] = useState("");
-    const history = useHistory();
 
-    const handleRegistrate = () =>{
+    const handleRegistrate = () => {
         localStorage.setItem('auth', true)
-        history.push('/account')
+        window.location.reload()
     }
 
     return (
