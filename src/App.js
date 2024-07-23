@@ -8,6 +8,7 @@ import Deposit from "./pages/Deposit";
 import Account from "./pages/Account";
 import GraphTest from "./pages/GraphTest";
 import AnimatedPage from './components/AnimatedPage';
+import PetalCenter from "./pages/PetalCenter";
 
 function App() {
     const [openModal, setOpenModal] = useState(false);
@@ -68,10 +69,17 @@ function App() {
                             </AnimatedPage>
                         </motion.div>
                     </Route>
+                    <Route path="/petal">
+                        <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit">
+                            <AnimatedPage>
+                                <PetalCenter/>
+                            </AnimatedPage>
+                        </motion.div>
+                    </Route>
                     <Route path="/graph">
                         <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit">
                             <AnimatedPage>
-                                <GraphTest />
+                                <GraphTest/>
                             </AnimatedPage>
                         </motion.div>
                     </Route>

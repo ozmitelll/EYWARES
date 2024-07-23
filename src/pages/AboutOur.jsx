@@ -4,8 +4,8 @@ import ArrowIcon from "../images/arrow-up-right.svg";
 const AboutOur = ({id}) => {
     return (
         <div id={id} className='lg:h-screen h-[930px] w-full bg-transparent text-white flex justify-end lg:py-4 mt-8'>
-            <div id={'about'} className='lg:w-1/2 sm:w-2/3 flex flex-col justify-center gap-4 lg:pl-8  lg:pr-24'>
-                <p  className=' text-4xl font-normal text-left'>
+            <div id={'about'} className='lg:w-1/2 sm:w-2/3 flex flex-col justify-center items-end gap-4 lg:pl-8'>
+                <p className=' text-4xl font-normal text-left w-full'>
                     О нас
                 </p>
                 <div
@@ -30,13 +30,16 @@ const AboutOur = ({id}) => {
                         дополнительные услуги, такие как личный менеджер для пользователей.
                     </p>
                 </div>
-                <button
-                    className='h-48 w-48 rounded-full bg-transparent border border-gray-300 flex flex-col items-center justify-center hover:bg-white text-white hover:text-black transition-all duration-300 ease-in-out'>
-                    <img src={ArrowIcon} alt='Start' className='w-21 h-21'/>
-                    <p className='m-0  text-xl font-normal leading-tight'>
-                        Начать
-                    </p>
-                </button>
+                <div
+                    className='w-48 h-48 hexagon text-white'>
+                    <button
+                        className={'second-hexagon hover:bg-white transition duration-300 ease-in-out hover:text-black'}>
+                        <img className='w-21 h-21 ' src={ArrowIcon} alt=''/>
+                        <p className='m-0 text-xl font-normal leading-6 '>
+                            Аккаунт
+                        </p>
+                    </button>
+                </div>
             </div>
         </div>
     )

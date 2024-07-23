@@ -8,7 +8,8 @@ import MyReferal from '../images/myRefereal.svg';
 import ReferalReferalEmpty from '../images/referalReferalEmpty.svg';
 import MyEmptyReferal from '../images/myReferealEmpty.svg';
 import Slider from 'react-slick';
-import ChevronDown from '../images/chevron-down.svg'; // Замените путь на правильный
+import ChevronDown from '../images/chevron-down.svg';
+import Tooltip from "../components/Tooltip"; // Замените путь на правильный
 
 const SampleNextArrow = (props) => {
     const { onClick } = props;
@@ -89,13 +90,17 @@ const GraphTest = () => {
                     <>
                         <div className={'flex md:gap-8 lg:gap-2'}>
                             <div className={'flex flex-col justify-center items-center'}>
-                                <img src={Predok} alt="" />
+                                <Tooltip referal_link="TGJ**************************JCrTt" price={'900 USDT'} date={'12.04.2024'}>
+                                    <img src={Predok} alt="" />
+                                </Tooltip>
+                                <Tooltip referal_link={'TGJ**************************JCrTt'} price={'900 USDT'} date={'12.04.2024'}>
                                 <img src={Me} alt={''} />
+                                </Tooltip>
                             </div>
                             <div className={'flex md:flex-col lg:flex-row md:justify-start justify-end items-center gap-4'}>
                                 <div className={'flex gap-4 md:w-full lg:w-auto justify-start'}>
                                     {[...Array(4)].map((_, i) => (
-                                        <img key={i} src={ReferalLikeMe} alt={''} />
+                                        <img key={i} src={ReferalLikeMe} alt={''}  />
                                     ))}
                                 </div>
                                 <div className={'flex gap-4'}>
@@ -110,7 +115,9 @@ const GraphTest = () => {
                                 {[...Array(4)].map((_, i) => (
                                     <div key={i} className={'flex flex-col'}>
                                         <div>
-                                            <img src={i < 2 ? MyReferal : MyEmptyReferal} alt={''} />
+                                            <Tooltip>
+                                            <img src={MyEmptyReferal} alt={''} />
+                                            </Tooltip>
                                         </div>
                                         <div className={'pl-20'}>
                                             <div className={'h-[36px] w-[55px]'}>
@@ -124,7 +131,9 @@ const GraphTest = () => {
                                 {[...Array(4)].map((_, i) => (
                                     <div key={i} className={'flex flex-col'}>
                                         <div>
+                                            <Tooltip>
                                             <img src={MyEmptyReferal} alt={''} />
+                                            </Tooltip>
                                         </div>
                                         <div className={'pl-20'}>
                                             <div className={'h-[36px] w-[55px]'}>

@@ -1,113 +1,79 @@
-import React, {useState, useEffect} from 'react';
-import {motion, useTransform, useScroll, useSpring} from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion, useTransform, useScroll } from 'framer-motion';
 import MainPage from "./MainPage";
-import SecondSlide from "./SecondSlide";
 import AboutOur from "./AboutOur";
-import FinanceModel from "./FinanceModel";
 import TermToSale from "./TermToSale";
 import ReferalProgram from "./ReferalProgram";
+import Contacts from "./Contacts";
+import Header from "../components/Header";
 import { throttle } from 'lodash';
 
-import Contacts from "./Contacts";
-import Circle from '../images/7.png';
-import Header from "../components/Header";
+import center from '../images/1_animation_.svg';
+import pental1 from '../images/2_animation_.svg';
+import pental2 from '../images/3_animation_.svg';
+import pental3 from '../images/4_animation_.svg';
+import pental4 from '../images/5_animation_.svg';
+import pental5 from '../images/6_animation_.svg';
+import pental6 from '../images/7_animation_.svg';
 
-const pointsDesktop = [
-    {start: 0, end: 800, x: 0, y: 0, scale: 1},
-    {start: 800, end: 1300, x: 700, y: 700, scale: 2.6},
-    {start: 1300, end: 1700, x: -800, y: 1200, scale: 3.3},
-    {start: 2300, end: 3000, x: -50, y: 2250, scale: 4},
-    {start: 2600, end: 2700, x: -50, y: 2250, scale: 14},
-];
-
-const pointsTablet = [
-    {start: 0, end: 600, x: 0, y: 0, scale: 0.8},
-    {start: 1000, end: 1100, x: 400, y: 1100, scale: 2},
-    {start: 1500, end: 2400, x: -550, y: 1550, scale: 2},
-    {start: 3000, end: 4000, x: 0, y: 3000, scale: 3},
-    {start: 4000, end: 4100, x: 0, y: 3000, scale: 30},
-];
-
-const pointsMobile = [
-    {start: 0, end: 1200, x: 0, y: 0, scale: 0.7},
-    {start: 1200, end: 2000, x: 250, y: 1350, scale: 2},
-    {start: 2000, end: 2500, x: -300, y: 2100, scale: 2},
-    {start: 3000, end: 3200, x: 0, y: 3050, scale: 3.5},
-    {start: 3200, end: 3300, x: 0, y: 3050, scale: 10},
-];
-
-const GetTransforms = (scrollY, points) => {
-    const x = useTransform(
-        scrollY,
-        points.flatMap((point, index) => (index < points.length - 1 ? [point.start, points[index + 1].start] : [])),
-        points.flatMap((point, index) => (index < points.length - 1 ? [point.x, points[index + 1].x] : []))
-    );
-
-    const y = useTransform(
-        scrollY,
-        points.flatMap((point, index) => (index < points.length - 1 ? [point.start, points[index + 1].start] : [])),
-        points.flatMap((point, index) => (index < points.length - 1 ? [point.y, points[index + 1].y] : []))
-    );
-
-    const scale = useTransform(
-        scrollY,
-        points.flatMap((point, index) => (index < points.length - 1 ? [point.start, points[index + 1].start] : [])),
-        points.flatMap((point, index) => (index < points.length - 1 ? [point.scale, points[index + 1].scale] : []))
-    );
-
-    const opacity = useTransform(scrollY, [points[points.length - 1].end, points[points.length - 1].end + 10], [1, 0]);
-
-    return {x, y, scale, opacity};
+const GetTransforms = (scrollY) => {
+    const y = useTransform(scrollY, [0, 4000], [0, 4000]);
+    const rotation = useTransform(scrollY, [0, 2900], [0, 360]);
+    // Create opacity transformations for each petal
+    const opacities = [
+        useTransform(scrollY, [0, 500], [0, 1]), // Petal 1
+        useTransform(scrollY, [500, 1000], [0, 1]), // Petal 2
+        useTransform(scrollY, [1000, 1500], [0, 1]), // Petal 3
+        useTransform(scrollY, [1500, 2000], [0, 1]), // Petal 4
+        useTransform(scrollY, [2000, 2500], [0, 1]), // Petal 5
+        useTransform(scrollY, [2500, 3000], [0, 1]), // Petal 6
+    ];
+    return { y, rotation, opacities };
 };
 
-const Landing = ({handleOpen, handleClose}) => {
-    const {scrollY} = useScroll();
-    const smoothScrollY = useSpring(scrollY, { stiffness: 100, damping: 30 });
-    const [points, setPoints] = useState(pointsDesktop);
+const Landing = ({ handleOpen, handleClose }) => {
+    const { scrollY } = useScroll();
+    const { y, rotation, opacities } = GetTransforms(scrollY);
 
     useEffect(() => {
-        const updatePoints = throttle(() => {
-            if (window.innerWidth < 768) {
-                setPoints(pointsMobile);
-            } else if (window.innerWidth < 1024) {
-                setPoints(pointsTablet);
-            } else {
-                setPoints(pointsDesktop);
-            }
+        const updateSize = throttle(() => {
+            // Update any state related to size here if needed
         }, 100);
 
-        window.addEventListener('resize', updatePoints);
-        updatePoints();
+        window.addEventListener('resize', updateSize);
+        updateSize();
 
         return () => {
-            window.removeEventListener('resize', updatePoints);
+            window.removeEventListener('resize', updateSize);
         };
     }, []);
-
-    const {x, y, scale, opacity} = GetTransforms(smoothScrollY, points);
-
 
     return (
         <>
             <div className={'w-full h-full lg:px-16 md:px-16 px-4 relative flex flex-col items-center overflow-hidden'}>
                 <Header handleOpen={handleOpen} handleClose={handleClose}/>
 
-                <motion.img
-                    src={Circle}
-                    alt="Animated Circle"
-                    className="absolute w-[414px] h-[414px] lg:mt-24 md:mt-24 lg:ml-16 -z-40 animated-element"
-                    style={{x, y, scale, opacity}}
-                />
+                <motion.div
+                    className="absolute w-[500px] h-[500px] mt-28 -z-40"
+                    style={{ y, rotate: rotation }}>
+                    <img src={center} alt="Center" style={{ position: 'absolute', width: '100%', height: '100%' }}/>
+                    {[pental1, pental2, pental3, pental4, pental5, pental6].map((src, index) => (
+                        <motion.img
+                            key={src}
+                            src={src}
+                            alt={`Petal ${index + 1}`}
+                            style={{ position: 'absolute', width: '100%', height: '100%', opacity: opacities[index] }}
+                        />
+                    ))}
+                </motion.div>
+
                 <MainPage id="anchor1"/>
-                <SecondSlide id="anchor2"/>
-                <AboutOur id="anchor3"/>
-                <FinanceModel id="anchor4"/>
+                <AboutOur id="anchor2"/>
                 <TermToSale/>
                 <ReferalProgram/>
                 <Contacts/>
             </div>
         </>
-
     );
 };
 

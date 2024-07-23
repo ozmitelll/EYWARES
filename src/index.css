@@ -9,18 +9,18 @@ body{
   background: #090909;
 }
 
-#term{
-  background-image: url("./images/BackUSages.svg");
-  background-position: 5% 0;
+/*#term{*/
+/*  background-image: url("./images/BackUSages.svg");*/
+/*  background-position: 5% 0;*/
 
-}
-#referal{
-  background-image: url("./images/ReferalBack.svg");
-}
+/*}*/
+/*#referal{*/
+/*  background-image: url("./images/ReferalBack.svg");*/
+/*}*/
 
-#contacts{
-  background-image: url("./images/ContactBack.svg");
-}
+/*#contacts{*/
+/*  background-image: url("./images/ContactBack.svg");*/
+/*}*/
 
 
 .hex-grid {
@@ -75,3 +75,36 @@ body{
 .animated-element {
   will-change: transform, opacity;
 }
+
+#chatWrapper{
+  background-color: blue;
+}
+.hexagon {
+  position: relative;
+  width: 188px;
+  height: 218px;
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  background: white; /* Background color of the hexagon */
+  clip-path: polygon(0 25%, 50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%);
+}
+
+.second-hexagon{
+  position: relative;
+  width: 184px;
+  height: 214px;
+  margin: 0 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  background: black; /* Background color of the hexagon */
+  clip-path: polygon(0 25%, 50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%);
+}
+
+

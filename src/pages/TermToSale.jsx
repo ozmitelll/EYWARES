@@ -5,16 +5,17 @@ const TermToSale = () => {
     return (
         <div className="relative h-screen w-full text-white flex lg:justify-end md:justify-end justify-center">
             {/* Movable term box with visible settings */}
-            <div
-                id="term"
-                className="absolute top-0 lg:left-0 -rotate-6 -left-40 lg:w-full md:w-full sm:w-0 h-full bg-center rounded-lg -z-50"
-                style={{
-                    backgroundSize: 'cover' // Ensures the background covers the div area
-                }}
-            >
-            </div>
-            <div id={'token-sale-terms'} className='lg:w-1/2 md:w-2/3 flex flex-col gap-10 justify-center lg:pr-16'>
-                <p className=' text-4xl font-normal m-0 text-left'>
+            {/*<div*/}
+            {/*    id="term"*/}
+            {/*    className="absolute top-0 lg:left-0 -rotate-6 -left-40 lg:w-full md:w-full sm:w-0 h-full bg-center rounded-lg -z-50"*/}
+            {/*    style={{*/}
+            {/*        backgroundSize: 'cover' // Ensures the background covers the div area*/}
+            {/*    }}*/}
+            {/*>*/}
+            {/*</div>*/}
+            <div id={'token-sale-terms'}
+                 className='lg:w-1/2 md:w-2/3 flex flex-col gap-10 justify-center items-end pl-8'>
+                <p className=' text-4xl font-normal m-0 text-left w-full'>
                     Условия продажи токенов
                 </p>
                 <div className='p-6 rounded-xl w-full bg-cardcolor bg-opacity-70 border border-gray-700 '>
@@ -35,13 +36,16 @@ const TermToSale = () => {
                         - Остальные 70% распределяются на реферальные вознаграждения и ликвидность мгновенно. <br/>
                     </p>
                 </div>
-                <button
-                    className='h-48 w-48 rounded-full bg-transparent border border-gray-300 flex flex-col items-center justify-center hover:bg-white text-white hover:text-black transition-all duration-300 ease-in-out'>
-                    <img src={ArrowIcon} alt='Start' className='w-21 h-21'/>
-                    <p className='m-0  text-xl font-normal leading-tight '>
-                        Начать
-                    </p>
-                </button>
+                <div
+                    className='w-48 h-48 hexagon text-white'>
+                    <button
+                        className={'second-hexagon hover:bg-white transition duration-300 ease-in-out hover:text-black'}>
+                        <img className='w-21 h-21 ' src={ArrowIcon} alt=''/>
+                        <p className='m-0 text-xl font-normal leading-6 '>
+                            Аккаунт
+                        </p>
+                    </button>
+                </div>
             </div>
         </div>
     );
