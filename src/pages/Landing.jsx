@@ -67,9 +67,9 @@ const Landing = ({ handleOpen, handleClose, handleOpenRegistrate }) => {
                     ))}
                 </motion.div>
 
-                <MainPage id="anchor1"/>
-                <AboutOur id="anchor2"/>
-                <TermToSale/>
+                <MainPage id="anchor1" handleOpen={handleOpenRegistrate}/>
+                <AboutOur id="anchor2" handleOpen={handleOpenRegistrate}/>
+                <TermToSale handleOpen={handleOpenRegistrate}/>
                 <ReferalProgram/>
                 <Contacts/>
             </div>

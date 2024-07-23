@@ -1,7 +1,8 @@
 import React from 'react';
 import ArrowIcon from '../images/arrow-up-right.svg';
+import {Link} from "react-router-dom";
 
-const TermToSale = () => {
+const TermToSale = ({handleOpen}) => {
     return (
         <div className="relative h-screen w-full text-white flex lg:justify-end md:justify-end justify-center">
             {/* Movable term box with visible settings */}
@@ -38,13 +39,19 @@ const TermToSale = () => {
                 </div>
                 <div
                     className='w-48 h-48 hexagon text-white'>
-                    <button
-                        className={'second-hexagon hover:bg-white transition duration-300 ease-in-out hover:text-black'}>
-                        <img className='w-21 h-21 ' src={ArrowIcon} alt=''/>
-                        <p className='m-0 text-xl font-normal leading-6 '>
-                            Аккаунт
-                        </p>
-                    </button>
+                    {localStorage.getItem('auth') != null ? <Link to={'/account'} className={'second-hexagon hover:bg-white transition duration-300 ease-in-out hover:text-black'}>
+                            <img className='w-21 h-21 ' src={ArrowIcon} alt=''/>
+                            <p className='m-0 text-xl font-normal leading-6 '>
+                                Аккаунт
+                            </p>
+                        </Link> :
+                        <button onClick={handleOpen} className={'second-hexagon hover:bg-white transition duration-300 ease-in-out hover:text-black'}>
+                            <img className='w-21 h-21 ' src={ArrowIcon} alt=''/>
+                            <p className='m-0 text-xl font-normal leading-6 '>
+                                Аккаунт
+                            </p>
+                        </button>
+                    }
                 </div>
             </div>
         </div>

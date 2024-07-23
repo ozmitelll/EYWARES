@@ -1,7 +1,8 @@
 import React from "react";
 import ArrowIcon from "../images/arrow-up-right.svg";
+import {Link} from "react-router-dom";
 
-const AboutOur = ({id}) => {
+const AboutOur = ({id,handleOpen}) => {
     return (
         <div id={id} className='lg:h-screen h-[930px] w-full bg-transparent text-white flex justify-end lg:py-4 mt-8'>
             <div id={'about'} className='lg:w-1/2 sm:w-2/3 flex flex-col justify-center items-end gap-4 lg:pl-8'>
@@ -32,13 +33,19 @@ const AboutOur = ({id}) => {
                 </div>
                 <div
                     className='w-48 h-48 hexagon text-white'>
-                    <button
-                        className={'second-hexagon hover:bg-white transition duration-300 ease-in-out hover:text-black'}>
-                        <img className='w-21 h-21 ' src={ArrowIcon} alt=''/>
-                        <p className='m-0 text-xl font-normal leading-6 '>
-                            Аккаунт
-                        </p>
-                    </button>
+                    {localStorage.getItem('auth') != null ? <Link to={'/account'} className={'second-hexagon hover:bg-white transition duration-300 ease-in-out hover:text-black'}>
+                            <img className='w-21 h-21 ' src={ArrowIcon} alt=''/>
+                            <p className='m-0 text-xl font-normal leading-6 '>
+                                Аккаунт
+                            </p>
+                        </Link> :
+                        <button onClick={handleOpen} className={'second-hexagon hover:bg-white transition duration-300 ease-in-out hover:text-black'}>
+                            <img className='w-21 h-21 ' src={ArrowIcon} alt=''/>
+                            <p className='m-0 text-xl font-normal leading-6 '>
+                                Аккаунт
+                            </p>
+                        </button>
+                    }
                 </div>
             </div>
         </div>

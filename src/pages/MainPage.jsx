@@ -1,6 +1,7 @@
 import React from 'react';
 import {motion, useTransform, useScroll} from 'framer-motion';
-import ArrowIcon from '../images/arrow-up-right.svg'; // Path to your Arrow Icon
+import ArrowIcon from '../images/arrow-up-right.svg';
+import {Link} from "react-router-dom"; // Path to your Arrow Icon
 
 const MainPage = ({id, handleOpen, handleClose}) => {
     const {scrollY} = useScroll();
@@ -9,12 +10,20 @@ const MainPage = ({id, handleOpen, handleClose}) => {
     const HexagonButton = () => (
         <div
             className='w-48 h-48 hexagon text-white'>
-            <button className={'second-hexagon hover:bg-white transition duration-300 ease-in-out hover:text-black'}>
-            <img className='w-21 h-21 ' src={ArrowIcon} alt=''/>
-            <p className='m-0 text-xl font-normal leading-6 '>
-                Аккаунт
-            </p>
-            </button>
+            {localStorage.getItem('auth') != null ? <Link to={'/account'} className={'second-hexagon hover:bg-white transition duration-300 ease-in-out hover:text-black'}>
+                <img className='w-21 h-21 ' src={ArrowIcon} alt=''/>
+                <p className='m-0 text-xl font-normal leading-6 '>
+                    Аккаунт
+                </p>
+            </Link> :
+                <button onClick={handleOpen} className={'second-hexagon hover:bg-white transition duration-300 ease-in-out hover:text-black'}>
+                    <img className='w-21 h-21 ' src={ArrowIcon} alt=''/>
+                    <p className='m-0 text-xl font-normal leading-6 '>
+                        Аккаунт
+                    </p>
+                </button>
+            }
+
         </div>
     )
 

@@ -81,7 +81,7 @@ function App() {
                     </Route>
                 </Switch>
             </AnimatePresence>
-            <Modal openModal={openModal} handleClose={handleClose} />
+            <Modal openModal={openModal} handleClose={handleClose}  handleOpen={handleOpenRegistate} />
             <RegistrateModal openModal={openRegistrateModal} handleClose={handleCloseRegistrate}/>
         </div>
     );
