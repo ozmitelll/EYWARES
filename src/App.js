@@ -9,9 +9,12 @@ import Account from "./pages/Account";
 import GraphTest from "./pages/GraphTest";
 import AnimatedPage from './components/AnimatedPage';
 import PetalCenter from "./pages/PetalCenter";
+import Registration from "./pages/Registration";
+import RegistrateModal from "./pages/RegistrateModal";
 
 function App() {
     const [openModal, setOpenModal] = useState(false);
+    const [openRegistrateModal, setOpenRegistrateModal] = useState(false);
     const location = useLocation();
     const history = useHistory();
     const [isNavigating, setIsNavigating] = useState(false);
@@ -30,6 +33,8 @@ function App() {
 
     const handleClose = () => setOpenModal(false);
     const handleOpen = () => setOpenModal(true);
+    const handleOpenRegistate = () => setOpenRegistrateModal(true)
+    const handleCloseRegistrate = () => setOpenRegistrateModal(false)
 
     const pageTransition = {
         initial: { opacity: 1 },
@@ -44,7 +49,7 @@ function App() {
                     <Route exact path="/">
                         <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit">
                             <AnimatedPage>
-                                <Landing openModal={openModal} handleOpen={handleOpen} handleClose={handleClose} />
+                                <Landing openModal={openModal} handleOpen={handleOpen} handleClose={handleClose} handleOpenRegistrate={handleOpenRegistate}  />
                             </AnimatedPage>
                         </motion.div>
                     </Route>
@@ -69,13 +74,6 @@ function App() {
                             </AnimatedPage>
                         </motion.div>
                     </Route>
-                    <Route path="/petal">
-                        <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit">
-                            <AnimatedPage>
-                                <PetalCenter/>
-                            </AnimatedPage>
-                        </motion.div>
-                    </Route>
                     <Route path="/graph">
                         <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit">
                             <AnimatedPage>
@@ -86,6 +84,7 @@ function App() {
                 </Switch>
             </AnimatePresence>
             <Modal openModal={openModal} handleClose={handleClose} />
+            <RegistrateModal openModal={openRegistrateModal} handleClose={handleCloseRegistrate}/>
         </div>
     );
 }

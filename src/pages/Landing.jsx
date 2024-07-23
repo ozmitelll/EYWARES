@@ -31,7 +31,7 @@ const GetTransforms = (scrollY) => {
     return { y, rotation, opacities };
 };
 
-const Landing = ({ handleOpen, handleClose }) => {
+const Landing = ({ handleOpen, handleClose, handleOpenRegistrate }) => {
     const { scrollY } = useScroll();
     const { y, rotation, opacities } = GetTransforms(scrollY);
 
@@ -51,7 +51,7 @@ const Landing = ({ handleOpen, handleClose }) => {
     return (
         <>
             <div className={'w-full h-full lg:px-16 md:px-16 px-4 relative flex flex-col items-center overflow-hidden'}>
-                <Header handleOpen={handleOpen} handleClose={handleClose}/>
+                <Header handleOpen={handleOpen} handleClose={handleClose} handleOpenRegistrate={handleOpenRegistrate}/>
 
                 <motion.div
                     className="absolute w-[500px] h-[500px] mt-28 -z-40"

@@ -4,7 +4,7 @@ import UpArrow from '../images/chevron-down.svg';
 import Logo from '../images/eywa-logo-removebg-preview.png';
 import MenuIcon from '../images/Frame60.svg';
 
-const Header = ({ handleOpen, handleClose }) => {
+const Header = ({ handleOpen, handleClose,handleOpenRegistrate }) => {
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef(null);
     const buttonRef = useRef(null);
@@ -18,6 +18,7 @@ const Header = ({ handleOpen, handleClose }) => {
             setIsOpen(false);
         }
     };
+
 
     useEffect(() => {
         setIsAuth(localStorage.getItem('auth') != null ? true : false)
@@ -37,7 +38,7 @@ const Header = ({ handleOpen, handleClose }) => {
                                     className=" flex items-center justify-center gap-4 rounded-lg border border-gray-600 bg-gradient-to-b from-mycolorfrom to-gray-mycolorto text-white  text-sm font-medium leading-tight p-2 px-6">
                     <span className="text-white font-light leading-none">Личный аккаунт</span>
                     <img src={UpArrow} alt=""/>
-                </button> : <button ref={buttonRef} onClick={toggleMenu}
+                </button> : <button ref={buttonRef} onClick={handleOpenRegistrate}
                                                     className="h-[42px] rounded-md border border-gray-600 bg-gradient-to-b from-mycolorfrom to-gray-mycolorto text-white  text-sm font-medium leading-tight p-2 px-12">
                 <span className="text-white font-light leading-none">Регистрация</span>
                 {/*<img src={UpArrow} alt=""/>*/}
