@@ -51,7 +51,7 @@ const Header = ({ handleOpen, handleClose,handleOpenRegistrate }) => {
                 </button>
             </div>
             {isAuth ? <div ref={menuRef}
-                           className={`absolute lg:right-0 md:right-0 mt-48 mr-[120px] ml-20 w-56 bg-[#282828] shadow-md z-50 flex flex-col rounded-lg overflow-hidden transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                           className={`absolute lg:right-0 md:right-0 mt-20 mr-[120px] ml-20 w-56 bg-[#282828] shadow-md z-50 flex flex-col rounded-lg overflow-hidden transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 <Link to="/history" className="p-2 text-white font-light hover:underline transition-colors">История
                     транзакций</Link>
                 <Link to="/deposit" className="p-2 text-white font-light hover:underline transition-colors">Внести

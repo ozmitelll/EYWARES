@@ -46,7 +46,7 @@ const Modal = ({openModal, handleClose, handleOpen}) => {
                         <img src={exit} alt="" className="w-7.5 h-3"/>
                     </button>
                 </div>
-                <div className="flex px-4  h-full lg:flex-row flex-col sm:justify-start md:justify-start lg:justify-between gap-72 lg:gap-0 md:gap-64">
+                <div className="flex px-4  h-full lg:flex-row flex-col sm:justify-start md:justify-start lg:justify-between gap-32 lg:gap-0 md:gap-32">
                     <div
                         className="flex flex-col lg:justify-start justify-center items-start lg:gap-12 gap-6 text-white font-montserrat lg:text-6xl md:text-4xl text-3xl font-thin leading-snug">
                         <p onClick={() => handleItemClick('about')}
