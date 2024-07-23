@@ -54,7 +54,7 @@ const Landing = ({ handleOpen, handleClose, handleOpenRegistrate }) => {
                 <Header handleOpen={handleOpen} handleClose={handleClose} handleOpenRegistrate={handleOpenRegistrate}/>
 
                 <motion.div
-                    className="absolute w-[500px] h-[500px] mt-28 -z-40"
+                    className="absolute w-[700px] h-[700px] -z-40"
                     style={{ y, rotate: rotation }}>
                     <img src={center} alt="Center" style={{ position: 'absolute', width: '100%', height: '100%' }}/>
                     {[pental1, pental2, pental3, pental4, pental5, pental6].map((src, index) => (
