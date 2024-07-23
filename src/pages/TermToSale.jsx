@@ -15,7 +15,7 @@ const TermToSale = ({handleOpen}) => {
             {/*>*/}
             {/*</div>*/}
             <div id={'token-sale-terms'}
-                 className='lg:w-1/2 md:w-2/3 flex flex-col gap-10 justify-center items-end pl-8'>
+                 className='lg:w-1/2 md:w-2/3 flex flex-col gap-10 justify-center items-end lg:pl-8 md:pl-8'>
                 <p className=' text-4xl font-normal m-0 text-left w-full'>
                     Условия продажи токенов
                 </p>
