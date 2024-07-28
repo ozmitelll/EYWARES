@@ -29,5 +29,7 @@
   "deposit_sum_placeholder": "Введите сумму депозита",
   "deposit_link": "Адрес реферера",
   "deposit_link_placeholder": "Введите адрес",
-  "deposit_button": "Продолжить"
+  "deposit_button": "Продолжить",
+  "referal_link": "Реферальный адрес",
+  "referal_link_placeholder":"Введите реферальный адрес"
 }

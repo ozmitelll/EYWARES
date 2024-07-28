@@ -29,7 +29,9 @@
   "deposit_sum_placeholder": "Enter deposit amount",
   "deposit_link": "Referrer Address",
   "deposit_link_placeholder": "Enter address",
-  "deposit_button": "Continue"
+  "deposit_button": "Continue",
+  "referal_link": "Referral Address",
+  "referal_link_placeholder": "Enter referral address"
 
 
 }

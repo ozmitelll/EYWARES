@@ -6,7 +6,6 @@ const Account = ({handleOpen, handleClose}) => {
     const [isAccordionOpen, setAccordionOpen] = useState(false);
     const contentRef = useRef(null);
 
-    // Function to toggle accordion state and set proper max-height
     const toggleAccordion = () => {
         setAccordionOpen(!isAccordionOpen);
     };

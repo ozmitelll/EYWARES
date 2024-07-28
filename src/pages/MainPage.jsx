@@ -35,10 +35,11 @@ const MainPage = ({id, handleOpen, handleClose}) => {
             <div
                 className='lg:pt-12 pt-0 flex md:flex-row flex-col justify-between items-center lg:pr-28 overflow-hidden '>
                 <motion.div
-                    className='transform transition-transform duration-200 ease-out flex items-center justify-center'
+                    className='transform transition-transform duration-200 ease-out flex flex-col justify-center'
                     style={{x}}
                 >
                     <span className={'text-9xl text-white '}>EYWA</span>
+                    <span className={'text-xl text-white text-left pl-3'}>Referal system</span>
                 </motion.div>
 
 

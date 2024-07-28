@@ -29,5 +29,7 @@
   "deposit_sum_placeholder": "أدخل مبلغ الإيداع",
   "deposit_link": "عنوان المُحيل",
   "deposit_link_placeholder": "أدخل العنوان",
-  "deposit_button": "استمرار"
+  "deposit_button": "استمرار",
+  "referal_link": "العنوان الإحالي",
+  "referal_link_placeholder": "أدخل العنوان الإحالي"
 }
