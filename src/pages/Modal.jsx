@@ -2,8 +2,10 @@ import React from 'react';
 import exit from '../images/Group36.svg';
 import ArrowIcon from '../images/arrow-up-right.svg';
 import {Link} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 
 const Modal = ({openModal, handleClose, handleOpen}) => {
+    const {t} = useTranslation();
     if (!openModal) return null;
 
     const handleItemClick = (anchorId) => {
@@ -50,16 +52,13 @@ const Modal = ({openModal, handleClose, handleOpen}) => {
                     <div
                         className="flex flex-col lg:justify-start justify-center items-start lg:gap-12 gap-6 text-white font-montserrat lg:text-6xl md:text-4xl text-3xl font-thin leading-snug">
                         <p onClick={() => handleItemClick('about')}
-                           className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">О
-                            нас</p>
+                           className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">{t('modal_about')}</p>
                         <p onClick={() => handleItemClick('token-sale-terms')}
-                           className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">Условия
-                            продажи токенов</p>
+                           className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">{t('modal_sell_tokens')}</p>
                         <p onClick={() => handleItemClick('referral-program')}
-                           className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">Реферальная
-                            программа</p>
+                           className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">{t('modal_referal')}</p>
                         <p onClick={() => handleItemClick('contacts')}
-                           className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">Контакты</p>
+                           className="hover-underline relative cursor-pointer transition duration-300 ease-in-out hover:underline-offset-[12px]">{t('modal_contacts')}</p>
                     </div>
 
                     <div
@@ -69,13 +68,13 @@ const Modal = ({openModal, handleClose, handleOpen}) => {
                             {localStorage.getItem('auth') != null ? <Link to={'/account'} className={'second-hexagon hover:bg-white transition duration-300 ease-in-out hover:text-black'}>
                                     <img className='w-21 h-21 ' src={ArrowIcon} alt=''/>
                                     <p className='m-0 text-xl font-normal leading-6 '>
-                                        Аккаунт
+                                        {t('account_hex_button')}
                                     </p>
                                 </Link> :
                                 <button onClick={handleOpen} className={'second-hexagon hover:bg-white transition duration-300 ease-in-out hover:text-black'}>
                                     <img className='w-21 h-21 ' src={ArrowIcon} alt=''/>
                                     <p className='m-0 text-xl font-normal leading-6 '>
-                                        Аккаунт
+                                        {t('account_hex_button')}
                                     </p>
                                 </button>
                             }

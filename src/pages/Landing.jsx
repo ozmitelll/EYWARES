@@ -19,7 +19,7 @@ import pental6 from '../images/7_animation_(2).svg';
 const GetTransforms = (scrollY) => {
     const y = useTransform(scrollY, [0, 4000], [0, 4000]);
     const rotation = useTransform(scrollY, [0, 2900], [0, 360]);
-    // Create opacity transformations for each petal
+
     const opacities = [
         useTransform(scrollY, [0, 500], [0, 1]), // Petal 1
         useTransform(scrollY, [500, 1000], [0, 1]), // Petal 2
@@ -54,7 +54,7 @@ const Landing = ({ handleOpen, handleClose, handleOpenRegistrate }) => {
                 <Header handleOpen={handleOpen} handleClose={handleClose} handleOpenRegistrate={handleOpenRegistrate}/>
 
                 <motion.div
-                    className="absolute w-[700px] h-[700px] -z-40"
+                    className="absolute w-[700px] h-[700px] -z-40 opacity-60"
                     style={{ y, rotate: rotation }}>
                     <img src={center} alt="Center" style={{ position: 'absolute', width: '100%', height: '100%' }}/>
                     {[pental1, pental2, pental3, pental4, pental5, pental6].map((src, index) => (

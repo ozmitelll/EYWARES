@@ -1,7 +1,9 @@
 import React, {useState} from 'react';
 import Header from "../components/Header";
+import {useTranslation} from "react-i18next";
 
 const Deposit = ({handleOpen, handleClose}) => {
+    const {t} = useTranslation();
     const [sum, setSum] = useState("");
     const [address, setAddress] = useState("");
 
@@ -18,27 +20,24 @@ const Deposit = ({handleOpen, handleClose}) => {
             >
             </div>
             <div className="flex flex-col justify-center items-center lg:gap-16 md:gap-16 gap-8 w-full">
-                <p className="text-white lg:pt-8 md:pt-8 pt-6 lg:text-3xl md:text-3xl text-2xl font-bold leading-snug text-left w-fit">Внести
-                    депозит</p>
+                <p className="text-white lg:pt-8 md:pt-8 pt-6 lg:text-3xl md:text-3xl text-2xl font-bold leading-snug text-left w-fit">{t("deposit")}</p>
                 <div
                     className="bg-[#222222A8] p-6 lg:w-[616px] md:w-[616px] w-full rounded-lg border border-[#5E5E5E87] flex flex-col items-center gap-6">
                     <div className="flex flex-col items-center w-full gap-3">
-                        <label className="w-full text-left text-white text-xl font-normal leading-snug">Сумма
-                            депозита</label>
+                        <label className="w-full text-left text-white text-xl font-normal leading-snug">{t("deposit_sum")}</label>
                         <input
                             type="text"
-                            placeholder={'Введите сумму депозита'}
+                            placeholder={t("deposit_sum_placeholder")}
                             className="w-full p-3 bg-[#282828] border border-[#686868] rounded text-white lg:text-xl md:text-xl text-lg font-bold leading-snug"
                             value={sum}
                             onChange={(e) => setSum(e.target.value)}
                         />
                     </div>
                     <div className="flex flex-col items-center w-full gap-3">
-                        <label className="w-full text-left text-white  text-xl font-normal leading-snug">Адрес
-                            реферера</label>
+                        <label className="w-full text-left text-white  text-xl font-normal leading-snug">{t("deposit_link")}</label>
                         <input
                             type="text"
-                            placeholder={'Введите адрес'}
+                            placeholder={t("deposit_link_placeholder")}
                             className="w-full p-3 bg-[#282828] border border-[#686868] rounded text-white lg:text-xl md:text-xl text-lg font-bold leading-snug"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
@@ -47,7 +46,7 @@ const Deposit = ({handleOpen, handleClose}) => {
                     <button
                         className="h-16 w-full bg-gray-300 border border-gray-400 rounded-lg flex justify-center items-center text-black  text-xl font-bold leading-snug"
                     >
-                        Продолжить
+                        {t("deposit_button")}
                     </button>
                 </div>
             </div>

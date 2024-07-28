@@ -9,6 +9,7 @@ import Account from "./pages/Account";
 import GraphTest from "./pages/GraphTest";
 import AnimatedPage from './components/AnimatedPage';
 import RegistrateModal from "./pages/RegistrateModal";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
     const [openModal, setOpenModal] = useState(false);
@@ -16,6 +17,8 @@ function App() {
     const location = useLocation();
     const history = useHistory();
     const [isNavigating, setIsNavigating] = useState(false);
+
+
 
     useEffect(() => {
         if (isNavigating) {
@@ -51,34 +54,27 @@ function App() {
                             </AnimatedPage>
                         </motion.div>
                     </Route>
-                    <Route path="/history">
+                    <PrivateRoute path="/history">
                         <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit">
                             <AnimatedPage>
                                 <History handleOpen={handleOpen} handleClose={handleClose} />
                             </AnimatedPage>
                         </motion.div>
-                    </Route>
-                    <Route path="/deposit">
+                    </PrivateRoute>
+                    <PrivateRoute path="/deposit">
                         <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit">
                             <AnimatedPage>
                                 <Deposit handleOpen={handleOpen} handleClose={handleClose} />
                             </AnimatedPage>
                         </motion.div>
-                    </Route>
-                    <Route path="/account">
+                    </PrivateRoute>
+                    <PrivateRoute path="/account">
                         <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit">
                             <AnimatedPage>
                                 <Account handleOpen={handleOpen} handleClose={handleClose} />
                             </AnimatedPage>
                         </motion.div>
-                    </Route>
-                    <Route path="/graph">
-                        <motion.div variants={pageTransition} initial="initial" animate="animate" exit="exit">
-                            <AnimatedPage>
-                                <GraphTest/>
-                            </AnimatedPage>
-                        </motion.div>
-                    </Route>
+                    </PrivateRoute>
                 </Switch>
             </AnimatePresence>
             <Modal openModal={openModal} handleClose={handleClose}  handleOpen={handleOpenRegistate} />

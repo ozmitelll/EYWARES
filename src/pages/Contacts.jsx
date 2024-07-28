@@ -1,6 +1,8 @@
 import React from "react";
+import {useTranslation} from "react-i18next";
 
 const Contacts = () =>{
+    const {t} = useTranslation();
     return(
         <div id={'contacts'} className='h-[600px] bg-transparent w-full relative'>
             {/*<div*/}
@@ -12,7 +14,7 @@ const Contacts = () =>{
             {/*    }}*/}
             {/*>*/}
             {/*</div>*/}
-            <p className={'text-left text-4xl text-white py-12'}>Контакты</p>
+            <p className={'text-left text-4xl text-white py-12'}>{t('modal_contacts')}</p>
         </div>
     )
 }
