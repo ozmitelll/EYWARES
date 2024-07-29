@@ -73,7 +73,7 @@ const History = ({handleOpen, handleClose}) => {
                 console.log(currentAcc)
                 //история транзакций моя
                 contract1.events.Deposit({
-                    filter: {user: `${currentAcc}`},
+                    filter: {user: currentAcc},
                     fromBlock: 0
                 }, function (error, event) {
                 })
