@@ -9,48 +9,65 @@ import {Address} from "../ContractAdress";
 var web3;
 var account;
 
-const handleRegistrate =  async () => {
 
-     /////////////////////////////////////подключение к метамаску
-
-     try {
-        if (window.ethereum) {
-            try {
-                const accounts = await window.ethereum.request({
-                    method: "eth_requestAccounts",
-                });
-                web3 = new Web3(window.ethereum)
-                account = accounts[0];
-                console.log(accounts[0]); //мой кошелек
-            } catch (error) {
-                console.log("Error connecting...");
-            }
-        } else {
-            console.log("Download Metamask");
-        }
-                   
-    //////////////////////////////////////////////////////////////
-
-        let contract1 = new web3.eth.Contract(ContractABI, Address);
-        let contractToken = new web3.eth.Contract([{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burnFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"}],
-                                                "0xB6F4FE5E23b559BFDbBb76fCCaeBe6573B3Cb2F9");   
-
-
-
-       await contractToken.methods.approve(Address, 100 * 10 ** 18).send({from: account})
-       await contract1.methods.deposit("0xa25ae0b9D39950DE8dB423E64eE8B6f38Cd1Cd64",100 * 10 ** 18).send({from: account})
-
-        
-    } catch (e) {
-        alert(`Error2`);
-    }
-}
 
 
 const Deposit = ({handleOpen, handleClose}) => {
     const {t} = useTranslation();
-    const [sum, setSum] = useState("");
+    const [sum, setSum] = useState(null);
     const [address, setAddress] = useState("");
+
+    const handleRegistrate =  async () => {
+        let valid = true;
+        let newErrors = { sum: '', address: '' };
+
+        if (!sum || isNaN(sum) || sum < 100) {
+            newErrors.sum = 'Сумма должна быть числом не менее 100';
+            valid = false;
+        }
+
+        if (!address) {
+            newErrors.address = 'Введите реферальную ссылку';
+            valid = false;
+        }
+
+
+
+        if (valid) {
+            try {
+                if (window.ethereum) {
+                    try {
+                        const accounts = await window.ethereum.request({
+                            method: "eth_requestAccounts",
+                        });
+                        web3 = new Web3(window.ethereum)
+                        account = accounts[0];
+                        console.log(accounts[0]); //мой кошелек
+                    } catch (error) {
+                        console.log("Error connecting...");
+                    }
+                } else {
+                    console.log("Download Metamask");
+                }
+
+                //////////////////////////////////////////////////////////////
+
+                let contract1 = new web3.eth.Contract(ContractABI, Address);
+                let contractToken = new web3.eth.Contract([{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burn","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"account","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"burnFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"subtractedValue","type":"uint256"}],"name":"decreaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"addedValue","type":"uint256"}],"name":"increaseAllowance","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"}],
+                    "0xB6F4FE5E23b559BFDbBb76fCCaeBe6573B3Cb2F9");
+
+
+
+                await contractToken.methods.approve(Address, sum * 10 ** 18).send({from: account})
+                await contract1.methods.deposit(address,sum * 10 ** 18).send({from: account})
+
+
+            } catch (e) {
+                console.error(`Deposit denied`);
+            }
+        }
+
+    }
 
     return (
         <div
@@ -69,9 +86,10 @@ const Deposit = ({handleOpen, handleClose}) => {
                 <div
                     className="bg-[#222222A8] p-6 lg:w-[616px] md:w-[616px] w-full rounded-lg border border-[#5E5E5E87] flex flex-col items-center gap-6">
                     <div className="flex flex-col items-center w-full gap-3">
-                        <label className="w-full text-left text-white text-xl font-normal leading-snug">{t("deposit_sum")}</label>
+                        <label
+                            className="w-full text-left text-white text-xl font-normal leading-snug">{t("deposit_sum")}</label>
                         <input
-                            type="text"
+                            type="number"
                             placeholder={t("deposit_sum_placeholder")}
                             className="w-full p-3 bg-[#282828] border border-[#686868] rounded text-white lg:text-xl md:text-xl text-lg font-bold leading-snug"
                             value={sum}
@@ -79,10 +97,11 @@ const Deposit = ({handleOpen, handleClose}) => {
                         />
                     </div>
                     <div className="flex flex-col items-center w-full gap-3">
-                        <label className="w-full text-left text-white  text-xl font-normal leading-snug">{t("deposit_link")}</label>
+                        <label
+                            className="w-full text-left text-white  text-xl font-normal leading-snug">{t("deposit_link")}</label>
                         <input
                             type="text"
-                            placeholder={t("deposit_link_placeholder")}
+                            placeholder={t("referal_link_placeholder")}
                             className="w-full p-3 bg-[#282828] border border-[#686868] rounded text-white lg:text-xl md:text-xl text-lg font-bold leading-snug"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
@@ -90,10 +109,10 @@ const Deposit = ({handleOpen, handleClose}) => {
                     </div>
                     <button
                         className="h-16 w-full bg-gray-300 border border-gray-400 rounded-lg flex justify-center items-center text-black  text-xl font-bold leading-snug"
-                       onClick={handleRegistrate}
+                        onClick={handleRegistrate}
                     >
                         {t("deposit_button")}
-                        
+
                     </button>
                 </div>
             </div>

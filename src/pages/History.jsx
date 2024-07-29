@@ -15,18 +15,17 @@ var account;
 const History = ({handleOpen, handleClose}) => {
     const {t} = useTranslation()
     const [transations, setTransations] = useState([
-        {id: 1, data: '15.01.2023', sum: 250.75, type: 'credit'},
-        {id: 2, data: '20.02.2023', sum: 340.50, type: 'debit'},
-        {id: 3, data: '05.03.2023', sum: 150.00, type: 'transfer'},
-        {id: 4, data: '10.04.2023', sum: 475.25, type: 'credit'},
-        {id: 5, data: '12.05.2023', sum: 60.30, type: 'debit'},
+        {data: '15.01.2023', sum: 250.75, type: 'credit'},
+        {data: '20.02.2023', sum: 340.50, type: 'debit'},
+        {data: '05.03.2023', sum: 150.00, type: 'transfer'},
+        {data: '10.04.2023', sum: 475.25, type: 'credit'},
+        {data: '12.05.2023', sum: 60.30, type: 'debit'},
     ]);
 
     const addTransaction = (data, sum, type) => {
         setTransations(prevTransactions => [
             ...prevTransactions,
             {
-                id: prevTransactions.length + 1,
                 data,
                 sum,
                 type
@@ -36,13 +35,13 @@ const History = ({handleOpen, handleClose}) => {
 
     const [widthWindow, setWidthWindow] = useState(window.innerWidth);
     useEffect(() => {
-        for (let i = 0; i < 2; i++) {
-            const today = new Date();
-            today.setDate(today.getDate() + i);
-            //Change transaction list ***TODO
-            addTransaction(1111, Math.random() * 1000, 'transaction');
-
-        }
+        // for (let i = 0; i < 2; i++) {
+        //     const today = new Date();
+        //     today.setDate(today.getDate() + i);
+        //     //Change transaction list ***TODO
+        //     addTransaction(1111, Math.random() * 1000, 'transaction');
+        //
+        // }
         ConnectWalletMetamask();
 
         const handleResize = () => {
@@ -57,7 +56,7 @@ const History = ({handleOpen, handleClose}) => {
     }, [])
 
     const ConnectWalletMetamask = async () => {
-
+        let temp = []
         try {
             if (window.ethereum) {
                 try {
@@ -82,34 +81,21 @@ const History = ({handleOpen, handleClose}) => {
                 filter: {user: "0x8da842318e07b086bffd865bc54672ae5f80330a"},
                 fromBlock: 0
             }, function (error, event) {
-                console.log(event);
             })
                 .on('data', function (event) {
-                    console.log(event?.returnValues[0]); //кошелек реферала
-                    console.log(parseInt(event?.returnValues[1]) / 10 ** 18); //сумма депозита
-                    console.log(event?.returnValues[2]); //кошелек инвайтера
-                    console.log(new Date(parseInt(event?.returnValues[3]) * 1000).toJSON()); //дата транзакции
+                    temp.push({
+                        data:new Date(parseInt(event?.returnValues[3]) * 1000).toJSON(),
+                        sum:parseInt(event?.returnValues[1]) / 10 ** 18,
+                        type:"deposit"
+                    })
 
                 })
-
-            //мои рефералы
-            contract1.events.Deposit({
-                filter: {inviter: "0xa25ae0b9D39950DE8dB423E64eE8B6f38Cd1Cd64"},
-                fromBlock: 0
-            }, function (error, event) {
-                console.log(event);
-            })
-                .on('data', function (event) {
-                    console.log(event?.returnValues[0]); //кошелек реферала
-                    console.log(parseInt(event?.returnValues[1]) / 10 ** 18); //сумма депозит
-                    console.log(new Date(parseInt(event?.returnValues[3]) * 1000).toJSON()); //дата транзакции
-
-                })
-
 
         } catch (e) {
-            alert(`Error2`);
+            console.error(`History error!`);
         }
+        setTransations(prevTransactions => [...prevTransactions, ...temp]);
+
     }
 
     return (
@@ -128,8 +114,8 @@ const History = ({handleOpen, handleClose}) => {
             <p className="text-white py-6 lg:text-3xl md:text-3xl text-2xl font-semibold text-left w-fit">{t('history_menu_transactions')}</p>
             {widthWindow < 500 ?
                 <div className={'w-full flex flex-col gap-6 pb-6'}>
-                    {transations.map((item) => (
-                        <div key={item.id}
+                    {transations.map((item,index) => (
+                        <div key={index}
                              className={'bg-[#191919] h-[138px] text-lg flex flex-col justify-between p-4 rounded-xl w-full'}>
                             <p>{t("table_date")}: <b>{item.data}</b></p>
                             <p>{t("table_amount")}: <b>{item.sum}</b></p>
@@ -148,8 +134,8 @@ const History = ({handleOpen, handleClose}) => {
                     <tr className="h-6 bg-transparent"></tr>
                     </thead>
                     <tbody>
-                    {transations.map((item) => (
-                        <React.Fragment key={item.id}>
+                    {transations.map((item,index) => (
+                        <React.Fragment key={index}>
                             <tr className="bg-[#191919] h-[45px] rounded-xl">
                                 <td className="rounded-l-lg">{item.data}</td>
                                 <td>{`${item.sum} USDT`}</td>
