@@ -51,6 +51,7 @@ const History = ({handleOpen, handleClose}) => {
 
     const ConnectWalletMetamask = async () => {
         let temp = []
+        let currentAcc = null;
         try {
             if (window.ethereum) {
                 try {
@@ -59,7 +60,7 @@ const History = ({handleOpen, handleClose}) => {
                     });
                     web3 = new Web3(window.ethereum)
                     account = accounts[0];
-                    console.log(accounts[0]); //мой кошелек
+                    currentAcc = account //мой кошелек
                 } catch (error) {
                     console.log("Error connecting...");
                 }
@@ -67,28 +68,29 @@ const History = ({handleOpen, handleClose}) => {
                 console.log("Download Metamask");
             }
 
-
-            let contract1 = new web3.eth.Contract(ContractABI, Address);
-
-            //история транзакций моя
-            contract1.events.Deposit({
-                filter: {user: "0x8da842318e07b086bffd865bc54672ae5f80330a"},
-                fromBlock: 0
-            }, function (error, event) {
-            })
-                .on('data', function (event) {
-                    temp.push({
-                        data:new Date(parseInt(event?.returnValues[3]) * 1000).toJSON(),
-                        sum:parseInt(event?.returnValues[1]) / 10 ** 18,
-                        type:"deposit"
-                    })
-
+            setTimeout(() => {
+                let contract1 = new web3.eth.Contract(ContractABI, Address);
+                console.log(currentAcc)
+                //история транзакций моя
+                contract1.events.Deposit({
+                    filter: {user: `${currentAcc}`},
+                    fromBlock: 0
+                }, function (error, event) {
                 })
+                    .on('data', function (event) {
+                        console.log(event)
+                        temp.push({
+                            data: new Date(parseInt(event?.returnValues[3]) * 1000).toLocaleDateString(),
+                            sum: parseInt(event?.returnValues[1]) / 10 ** 18,
+                            type: "deposit"
+                        })
+                    })
+                setTimeout(() => setTransations(temp), 200);
+            },200)
 
         } catch (e) {
             console.error(`History error!`);
         }
-        setTransations(prevTransactions => [...prevTransactions, ...temp]);
 
     }
 
@@ -108,7 +110,7 @@ const History = ({handleOpen, handleClose}) => {
             <p className="text-white py-6 lg:text-3xl md:text-3xl text-2xl font-semibold text-left w-fit">{t('history_menu_transactions')}</p>
             {widthWindow < 500 ?
                 <div className={'w-full flex flex-col gap-6 pb-6'}>
-                    {transations.map((item,index) => (
+                    {transations.map((item, index) => (
                         <div key={index}
                              className={'bg-[#191919] h-[138px] text-lg flex flex-col justify-between p-4 rounded-xl w-full'}>
                             <p>{t("table_date")}: <b>{item.data}</b></p>
@@ -128,7 +130,7 @@ const History = ({handleOpen, handleClose}) => {
                     <tr className="h-6 bg-transparent"></tr>
                     </thead>
                     <tbody>
-                    {transations.map((item,index) => (
+                    {transations.map((item, index) => (
                         <React.Fragment key={index}>
                             <tr className="bg-[#191919] h-[45px] rounded-xl">
                                 <td className="rounded-l-lg">{item.data}</td>

@@ -120,18 +120,17 @@ const GraphTest = () => {
 
             //история транзакций моя
             contract1.events.Deposit({
-                filter: {user: "0x8da842318e07b086bffd865bc54672ae5f80330a"},
+                filter: {user: NewStructure.me.wallet},
                 fromBlock: 0
             }, function (error, event) {
-                console.log(event);
             })
                 .on('data', function (event) {
                     NewStructure.referal.wallet = event?.returnValues[2];
                 })
 
-
-            NewStructure.referalsPrev = await getPrevRefferals("0x8da842318e07b086bffd865bc54672ae5f80330a")
+            NewStructure.referalsPrev = await getPrevRefferals(NewStructure.referal.wallet)
             NewStructure.myReferals = await getMyRefferals(NewStructure.me.wallet)
+
             setTimeout(() => setStructure(NewStructure), 200);
             setIsLoading(false);
         } catch (e) {
@@ -171,7 +170,6 @@ const GraphTest = () => {
                         date: new Date(parseInt(event?.returnValues[3]) * 1000).toJSON()
                     });
                 })
-
 
         } catch (e) {
             console.error('Prev');
