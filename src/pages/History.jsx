@@ -94,6 +94,7 @@ const History = ({handleOpen, handleClose}) => {
 
     }
 
+
     return (
         <div
             className="lg:h-auto md:h-auto h-fit w-full bg-transparent text-white flex flex-col justify-start lg:gap-8 md:gap-20 gap-4 items-center relative lg:px-16 md:px-16 px-4 pb-16">
