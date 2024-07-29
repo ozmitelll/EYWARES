@@ -14,7 +14,8 @@ import Tooltip from "../components/Tooltip";
 import {Web3} from "web3";
 import {ContractABI} from "../ABI";
 import {Address} from "../ContractAdress";
-import {parseInt} from "lodash"; // Замените путь на правильный
+import {parseInt} from "lodash";
+import {logDOM} from "@testing-library/react"; // Замените путь на правильный
 
 
 var window1;
@@ -114,21 +115,22 @@ const GraphTest = () => {
                 console.log("Download Metamask");
             }
 
-
             ///////////////////////////////////////////////////////////////////////////////////////////////////
             let contract1 = new web3.eth.Contract(ContractABI, Address);
 
             //история транзакций моя
-            contract1.events.Deposit({
+            const events = await contract1.getPastEvents('Deposit', {
                 filter: {user: NewStructure.me.wallet},
                 fromBlock: 0
-            }, function (error, event) {
-            })
-                .on('data', function (event) {
-                    NewStructure.referal.wallet = event?.returnValues[2];
-                })
+            });
 
-            NewStructure.referalsPrev = await getPrevRefferals(NewStructure.referal.wallet)
+            if (events.length > 0) {
+                NewStructure.referal.wallet = events[0].returnValues[2]; // Принимаем первое событие для примера
+            }
+            console.log(NewStructure.referal.wallet)
+            if(NewStructure.referal.wallet !== ""){
+                NewStructure.referalsPrev = await getPrevRefferals(NewStructure.referal.wallet) // undefined
+            }
             NewStructure.myReferals = await getMyRefferals(NewStructure.me.wallet)
 
             setTimeout(() => setStructure(NewStructure), 200);
@@ -159,13 +161,13 @@ const GraphTest = () => {
             let contract1 = new web3.eth.Contract(ContractABI, Address);
 
             contract1.events.Deposit({
-                filter: {user: `${adress_wallet}`},
+                filter: {inviter: `${adress_wallet}`},
                 fromBlock: 0
             }, function (error, event) {
             })
                 .on('data', function (event) {
                     temp.push({
-                        wallet: event?.returnValues[2],
+                        wallet: event?.returnValues[0],
                         deposit: parseInt(event?.returnValues[1]) / 10 ** 18,
                         date: new Date(parseInt(event?.returnValues[3]) * 1000).toJSON()
                     });
