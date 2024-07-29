@@ -14,13 +14,7 @@ var account;
 
 const History = ({handleOpen, handleClose}) => {
     const {t} = useTranslation()
-    const [transations, setTransations] = useState([
-        {data: '15.01.2023', sum: 250.75, type: 'credit'},
-        {data: '20.02.2023', sum: 340.50, type: 'debit'},
-        {data: '05.03.2023', sum: 150.00, type: 'transfer'},
-        {data: '10.04.2023', sum: 475.25, type: 'credit'},
-        {data: '12.05.2023', sum: 60.30, type: 'debit'},
-    ]);
+    const [transations, setTransations] = useState([]);
 
     const addTransaction = (data, sum, type) => {
         setTransations(prevTransactions => [
