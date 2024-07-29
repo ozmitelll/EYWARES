@@ -111,7 +111,7 @@ const History = ({handleOpen, handleClose}) => {
             <p className="text-white py-6 lg:text-3xl md:text-3xl text-2xl font-semibold text-left w-fit">{t('history_menu_transactions')}</p>
             {widthWindow < 500 ?
                 <div className={'w-full flex flex-col gap-6 pb-6'}>
-                    {transations.map((item, index) => (
+                    {transations.map((item,index) => (
                         <div key={index}
                              className={'bg-[#191919] h-[138px] text-lg flex flex-col justify-between p-4 rounded-xl w-full'}>
                             <p>{t("table_date")}: <b>{item.data}</b></p>
@@ -131,7 +131,7 @@ const History = ({handleOpen, handleClose}) => {
                     <tr className="h-6 bg-transparent"></tr>
                     </thead>
                     <tbody>
-                    {transations.map((item, index) => (
+                    {transations.map((item,index) => (
                         <React.Fragment key={index}>
                             <tr className="bg-[#191919] h-[45px] rounded-xl">
                                 <td className="rounded-l-lg">{item.data}</td>
