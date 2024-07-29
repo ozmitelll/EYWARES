@@ -2,6 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import GraphTest from "./GraphTest";
 import Header from "../components/Header";
 
+
 const Account = ({handleOpen, handleClose}) => {
     const [isAccordionOpen, setAccordionOpen] = useState(false);
     const contentRef = useRef(null);
@@ -15,6 +16,9 @@ const Account = ({handleOpen, handleClose}) => {
             contentRef.current.style.maxHeight = isAccordionOpen ? `${contentRef.current.scrollHeight}px` : '0px';
         }
     }, [isAccordionOpen]);
+
+
+
 
     return (
         <div

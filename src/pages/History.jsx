@@ -5,13 +5,11 @@ import {useTranslation} from "react-i18next";
 import {Web3} from "web3";
 import {ContractABI} from "../ABI"
 import {Address} from "../ContractAdress";
-import { parseInt } from "lodash";
+import {parseInt} from "lodash";
 
 var window1;
 var web3;
 var account;
-
-
 
 
 const History = ({handleOpen, handleClose}) => {
@@ -43,10 +41,10 @@ const History = ({handleOpen, handleClose}) => {
             today.setDate(today.getDate() + i);
             //Change transaction list ***TODO
             addTransaction(1111, Math.random() * 1000, 'transaction');
-            
+
         }
-            ConnectWalletMetamask();
-        
+        ConnectWalletMetamask();
+
         const handleResize = () => {
             setWidthWindow(window.innerWidth);
         };
@@ -59,7 +57,6 @@ const History = ({handleOpen, handleClose}) => {
     }, [])
 
     const ConnectWalletMetamask = async () => {
-        /////////////////////////////////////подключение к метамаску
 
         try {
             if (window.ethereum) {
@@ -76,39 +73,40 @@ const History = ({handleOpen, handleClose}) => {
             } else {
                 console.log("Download Metamask");
             }
-    
-    
-    ///////////////////////////////////////////////////////////////////////////////////////////////////           
-            let contract1 = new web3.eth.Contract(ContractABI, Address);    
+
+
+            let contract1 = new web3.eth.Contract(ContractABI, Address);
 
             //история транзакций моя
-        contract1.events.Deposit({
-            filter: {user: "0x8da842318e07b086bffd865bc54672ae5f80330a"}, 
-            fromBlock: 0
-        }, function(error, event){ console.log(event); })
-        .on('data', function(event){
-            console.log(event?.returnValues[0]); //кошелек реферала
-            console.log(parseInt(event?.returnValues[1])/10**18); //сумма депозита
-            console.log(event?.returnValues[2]); //кошелек инвайтера
-            console.log(new Date(parseInt(event?.returnValues[3])*1000).toJSON()); //дата транзакции 
-            
-        })
+            contract1.events.Deposit({
+                filter: {user: "0x8da842318e07b086bffd865bc54672ae5f80330a"},
+                fromBlock: 0
+            }, function (error, event) {
+                console.log(event);
+            })
+                .on('data', function (event) {
+                    console.log(event?.returnValues[0]); //кошелек реферала
+                    console.log(parseInt(event?.returnValues[1]) / 10 ** 18); //сумма депозита
+                    console.log(event?.returnValues[2]); //кошелек инвайтера
+                    console.log(new Date(parseInt(event?.returnValues[3]) * 1000).toJSON()); //дата транзакции
+
+                })
 
             //мои рефералы
-        contract1.events.Deposit({
-            filter: {inviter: "0xa25ae0b9D39950DE8dB423E64eE8B6f38Cd1Cd64"}, 
-            fromBlock: 0
-        }, function(error, event){ console.log(event); })
-        .on('data', function(event){
-            console.log(event?.returnValues[0]); //кошелек реферала
-            console.log(parseInt(event?.returnValues[1])/10**18); //сумма депозит
-            console.log(new Date(parseInt(event?.returnValues[3])*1000).toJSON()); //дата транзакции 
-            
-        })
-                            
-       
-       
-            
+            contract1.events.Deposit({
+                filter: {inviter: "0xa25ae0b9D39950DE8dB423E64eE8B6f38Cd1Cd64"},
+                fromBlock: 0
+            }, function (error, event) {
+                console.log(event);
+            })
+                .on('data', function (event) {
+                    console.log(event?.returnValues[0]); //кошелек реферала
+                    console.log(parseInt(event?.returnValues[1]) / 10 ** 18); //сумма депозит
+                    console.log(new Date(parseInt(event?.returnValues[3]) * 1000).toJSON()); //дата транзакции
+
+                })
+
+
         } catch (e) {
             alert(`Error2`);
         }

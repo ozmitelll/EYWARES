@@ -29,7 +29,7 @@ const Tooltip = ({children, price, date, referal_link}) => {
                     zIndex: 1000,
 
                 }}>
-                    {referal_link && price && date ? <div className={'flex flex-col justify-center items-start'}>
+                    {referal_link ? <div className={'flex flex-col justify-center items-start'}>
                             <p className={'font-bold'}>{referal_link}</p>
                             <p className={'font-bold'}>{price}</p>
                             <p className={'text-gray-400'}>{date}</p>
