@@ -1,12 +1,20 @@
 import React, {useState} from 'react';
 import x from "../images/x.svg"
 
+import {Web3} from "web3";
+import {ContractABI} from "../ABI"
+import {Address} from "../ContractAdress";
+
+var window1;
+var web3;
+var account;
+
 const Registration = ({handleOpen, handleClose}) => {
     const [sum, setSum] = useState(null);
     const [address, setAddress] = useState("");
     const [errors, setErrors] = useState({ sum: '', address: '' });
 
-    const handleRegistrate = () => {
+    const handleRegistrate =  () => {
         let valid = true;
         let newErrors = { sum: '', address: '' };
 
@@ -24,10 +32,13 @@ const Registration = ({handleOpen, handleClose}) => {
 
         setErrors(newErrors);
 
+
         if (valid) {
+                
             localStorage.setItem('auth', true);
             window.location.reload();
         }
+
     }
 
     return (
