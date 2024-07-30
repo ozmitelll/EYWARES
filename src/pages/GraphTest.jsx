@@ -128,7 +128,7 @@ const GraphTest = () => {
                 NewStructure.referal.wallet = events[0].returnValues[2]; // Принимаем первое событие для примера
             }
             console.log(NewStructure.referal.wallet)
-            if(NewStructure.referal.wallet !== ""){
+            if (NewStructure.referal.wallet !== "") {
                 NewStructure.referalsPrev = await getPrevRefferals(NewStructure.referal.wallet) // undefined
             }
             NewStructure.myReferals = await getMyRefferals(NewStructure.me.wallet)
@@ -221,23 +221,25 @@ const GraphTest = () => {
     }
 
     const getStructure = async (address_wallet) => {
-        console.log(address_wallet)
-        setIsLoading(true)
-        let newStructure = {
-            referal: {wallet: structure.me, deposit: "", date: ""},
-            referalsPrev: [],
-            me: {wallet: address_wallet, deposit: "", date: ""},
-            myReferals: []
-        };
-        try {
-            newStructure.referalsPrev = await getPrevRefferals(newStructure.referal.wallet)
-            newStructure.myReferals = await getMyRefferals(address_wallet)
-            setTimeout(() => setStructure(newStructure), 200);
-            setIsLoading(false);
-            console.log(structure)
-        } catch (e) {
-            alert(`Error2`);
+        if (address_wallet !== undefined) {
+            setIsLoading(true)
+            let newStructure = {
+                referal: {wallet: structure.me, deposit: "", date: ""},
+                referalsPrev: [],
+                me: {wallet: address_wallet, deposit: "", date: ""},
+                myReferals: []
+            };
+            try {
+                newStructure.referalsPrev = await getPrevRefferals(newStructure.referal.wallet)
+                newStructure.myReferals = await getMyRefferals(address_wallet)
+                setTimeout(() => setStructure(newStructure), 200);
+                setIsLoading(false);
+                console.log(structure)
+            } catch (e) {
+                alert(`Error2`);
+            }
         }
+
     }
 
     return (
