@@ -15,7 +15,6 @@ import {Web3} from "web3";
 import {ContractABI} from "../ABI";
 import {Address} from "../ContractAdress";
 import {parseInt} from "lodash";
-import {logDOM} from "@testing-library/react"; // Замените путь на правильный
 
 
 var window1;

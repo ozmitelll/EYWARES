@@ -18,7 +18,7 @@ const Tooltip = ({children, price, date, referal_link}) => {
             {isVisible && (
                 <div ref={tooltipRef} style={{
                     position: 'absolute',
-                    bottom: '100%',
+                    bottom: '70%',
                     left: '50%',
                     transform: 'translateX(-25%)',
                     marginBottom: '10px',
@@ -38,7 +38,6 @@ const Tooltip = ({children, price, date, referal_link}) => {
                             <button className={' flex items-center justify-center gap-4 w-[200px] rounded-lg border border-gray-600 bg-gradient-to-b from-mycolorfrom to-gray-mycolorto text-white  text-sm font-medium leading-tight p-2 px-6'}>Внести депозит</button>
                         </div>
                     }
-
                 </div>
             )}
         </div>
