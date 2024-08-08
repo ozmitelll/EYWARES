@@ -17,6 +17,8 @@ const Account = ({handleOpen, handleClose}) => {
     const [balanceToken, setBalanceToken] = useState(null);
     const [allDeposit, setAllDeposit] = useState(null);
     const [allSumDeposit, setAllSumDeposit] = useState(null);
+    const [allUsers, setAllUsers] = useState(null);
+    const [allActiveUsers, setActiveAllUsers] = useState(null);
     const contentRef = useRef(null);
 
     const toggleAccordion = () => {
@@ -71,6 +73,8 @@ const Account = ({handleOpen, handleClose}) => {
     const GetAllDeposit = async () =>{
         let allDeposit = [];
         let allSumDeposit = 0;
+        let activeUsers = [];
+        let allActiveUsers = [];
 
         try {
             if (window.ethereum) {
@@ -93,20 +97,19 @@ const Account = ({handleOpen, handleClose}) => {
             let contract1 = new web3.eth.Contract(ContractABI, Address);
 
             contract1.events.Deposit({
-             
             fromBlock: 0
             }, function (error, event) {
             })
                 .on('data', function (event) {
-                
+                      
                     allDeposit.push(1);
                     setAllDeposit(allDeposit.length); 
                    
-                })
+            })
 
 
             contract1.events.Deposit({
-                   
+            filter: {user:account},       
             fromBlock: 0
             }, function (error, event) {
             })
@@ -115,12 +118,51 @@ const Account = ({handleOpen, handleClose}) => {
                     allSumDeposit += parseInt(event?.returnValues[1]) / 10 ** 18;
                     setAllSumDeposit(allSumDeposit);
                        
-                })
-    
+            })
 
-                
-          
-                
+            contract1.events.AllActiveUsers({
+            fromBlock: 0
+            }, function (error, event) {
+            })
+                .on('data', function (event) {
+                          
+                    activeUsers.push(1);
+                    setAllUsers(activeUsers.length); 
+                       
+            })
+
+            let transactions = [];
+
+            function getUniqueValues(arr) {
+                const uniqueValues = new Set();
+            
+                arr.forEach(item => {
+                    uniqueValues.add(item);
+                });
+            
+                return Array.from(uniqueValues);
+            }
+            
+
+            contract1.events.Deposit({
+            filter: {datas:Date.now()},           
+            fromBlock: 0
+            }, function (error, event) {
+            })
+                .on('data', function (event) {
+            
+                    transactions = [...transactions,event?.returnValues[0]];   
+                    allActiveUsers.push(1);
+                   
+                    const uniqueNames = getUniqueValues(transactions, "address");
+                    console.log(uniqueNames);    
+
+                    setActiveAllUsers(uniqueNames.length);
+            })
+
+           
+    
+      
         } catch (e) {
             console.error(`GetBalance error`);
         } 
@@ -173,8 +215,8 @@ const Account = ({handleOpen, handleClose}) => {
                         </div>
                     </div>
                     <div className='lg:w-1/2 w-full flex flex-col justify-center items-start gap-6'>
-                        <p className=' text-xl font-normal'>Общее число пользователей: <b>900</b></p>
-                        <p className=' text-xl font-normal'>Активные пользователи: <b>900</b></p>
+                        <p className=' text-xl font-normal'>Общее число пользователей: <b>{allUsers}</b></p>
+                        <p className=' text-xl font-normal'>Активные пользователи: <b>{allActiveUsers}</b></p>
                         <p className=' text-xl font-normal'>Общее число депозитов: <b>{allDeposit}</b></p>
                         <p className=' text-xl font-normal'>Общее число реферальных
                             вознаграждений: <b>900</b></p>
