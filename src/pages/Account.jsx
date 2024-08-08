@@ -2,9 +2,21 @@ import React, {useState, useRef, useEffect} from 'react';
 import GraphTest from "./GraphTest";
 import Header from "../components/Header";
 
+import {Web3} from "web3";
+import {ContractABI} from "../ABI"
+import {Address} from "../ContractAdress";
+
+import {ContractABITokenUSDT} from "../ABI"
+import {AddressTokenUsdt} from "../ContractAdress";
+
+var web3;
+var account;
 
 const Account = ({handleOpen, handleClose}) => {
     const [isAccordionOpen, setAccordionOpen] = useState(false);
+    const [balanceToken, setBalanceToken] = useState(null);
+    const [allDeposit, setAllDeposit] = useState(null);
+    const [allSumDeposit, setAllSumDeposit] = useState(null);
     const contentRef = useRef(null);
 
     const toggleAccordion = () => {
@@ -15,10 +27,108 @@ const Account = ({handleOpen, handleClose}) => {
         if (contentRef.current) {
             contentRef.current.style.maxHeight = isAccordionOpen ? `${contentRef.current.scrollHeight}px` : '0px';
         }
+
+        GetBalance();
+        GetAllDeposit();
+
     }, [isAccordionOpen]);
 
 
+    const GetBalance =  async () => {
+        let bToken;
+        try {
+            if (window.ethereum) {
+                try {
+                    const accounts = await window.ethereum.request({
+                        method: "eth_requestAccounts",
+                    });
+                    web3 = new Web3(window.ethereum)
+                    account = accounts[0];
+                    console.log(accounts[0]); //мой кошелек
+                } catch (error) {
+                    console.log("Error connecting...");
+                }
+            } else {
+                console.log("Download Metamask");
+            }
 
+            //////////////////////////////////////////////////////////////
+
+            let contractToken = new web3.eth.Contract(ContractABITokenUSDT, AddressTokenUsdt);
+
+            bToken = parseInt(await contractToken.methods.balanceOf(account).call()) / 10 ** 18;
+
+        } catch (e) {
+            console.error(`GetBalance error`);
+        }
+
+
+        setBalanceToken(bToken);
+
+    }
+
+
+    const GetAllDeposit = async () =>{
+        let allDeposit = [];
+        let allSumDeposit = 0;
+
+        try {
+            if (window.ethereum) {
+                try {
+                    const accounts = await window.ethereum.request({
+                        method: "eth_requestAccounts",
+                    });
+                    web3 = new Web3(window.ethereum)
+                    account = accounts[0];
+                    console.log(accounts[0]); //мой кошелек
+                } catch (error) {
+                    console.log("Error connecting...");
+                }
+            } else {
+                console.log("Download Metamask");
+            }
+
+            //////////////////////////////////////////////////////////////
+
+            let contract1 = new web3.eth.Contract(ContractABI, Address);
+
+            contract1.events.Deposit({
+             
+            fromBlock: 0
+            }, function (error, event) {
+            })
+                .on('data', function (event) {
+                
+                    allDeposit.push(1);
+                    setAllDeposit(allDeposit.length); 
+                   
+                })
+
+
+            contract1.events.Deposit({
+                   
+            fromBlock: 0
+            }, function (error, event) {
+            })
+                .on('data', function (event) {
+                    
+                    allSumDeposit += parseInt(event?.returnValues[1]) / 10 ** 18;
+                    setAllSumDeposit(allSumDeposit);
+                       
+                })
+    
+
+                
+          
+                
+        } catch (e) {
+            console.error(`GetBalance error`);
+        } 
+
+
+       
+        setAllSumDeposit(1);
+    }
 
     return (
         <div
@@ -38,8 +148,8 @@ const Account = ({handleOpen, handleClose}) => {
                 <div className='flex flex-col lg:flex-row justify-center items-end w-full gap-8'>
                     <div
                         className='lg:w-1/2 w-full bg-[#222222] border border-gray-700 rounded-lg p-6 flex flex-col justify-center items-start'>
-                        <p className=' text-2xl font-normal py-2'>Баланс токенов: <b>900</b></p>
-                        <p className=' text-2xl font-normal py-2'>Сумма депозитов: <b>900</b></p>
+                        <p className=' text-2xl font-normal py-2'>Баланс токенов: <b>{balanceToken}</b></p>
+                        <p className=' text-2xl font-normal py-2'>Сумма депозитов: <b>{allSumDeposit}</b></p>
                         <p className=' text-2xl font-normal py-2'>Сумма реферальных вознаграждений: <b>900</b>
                         </p>
                         <div onClick={toggleAccordion}
@@ -65,7 +175,7 @@ const Account = ({handleOpen, handleClose}) => {
                     <div className='lg:w-1/2 w-full flex flex-col justify-center items-start gap-6'>
                         <p className=' text-xl font-normal'>Общее число пользователей: <b>900</b></p>
                         <p className=' text-xl font-normal'>Активные пользователи: <b>900</b></p>
-                        <p className=' text-xl font-normal'>Общее число депозитов: <b>900</b></p>
+                        <p className=' text-xl font-normal'>Общее число депозитов: <b>{allDeposit}</b></p>
                         <p className=' text-xl font-normal'>Общее число реферальных
                             вознаграждений: <b>900</b></p>
                     </div>
