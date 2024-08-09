@@ -62,7 +62,11 @@ const GraphTest = () => {
     };
 
     useEffect(() => {
-
+  
+        //////////////////////// 
+        BuyReferral(); 
+        ////////////////////////
+        
         ConnectWalletMetamask();
 
         window.addEventListener('resize', handleResize);
@@ -71,7 +75,12 @@ const GraphTest = () => {
         };
     }, []);
 
+    /////////////////////////////////////////////////////////
+    const  BuyReferral =  async () => {
 
+    }
+    /////////////////////////////////////////////////////////
+    
     const settings = {
         className: "center",
         infinite: true,
